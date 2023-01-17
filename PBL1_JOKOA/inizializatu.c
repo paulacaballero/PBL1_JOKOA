@@ -1,6 +1,9 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <stdio.h>
+#include "soinua.h"
+
+#define JOKOA_SOUND ".\\music\\main_theme.wav"
 
 extern const int SCREEN_WIDTH, SCREEN_HEIGHT;
 extern int quit;
@@ -8,23 +11,21 @@ extern int quit;
 SDL_Window* window = NULL;
 SDL_Surface* screenSurface = NULL;
 SDL_Surface* playerP1 = NULL;
-SDL_Surface* playerP2 = NULL;
-SDL_Surface* playerP3 = NULL;
-SDL_Surface* playerP4 = NULL;
-SDL_Surface* playerP5 = NULL;
-SDL_Surface* playerP6 = NULL;
 SDL_Surface* background = NULL;
 SDL_Surface* backgroundCopy = NULL;
 SDL_Surface* bala = NULL;
 SDL_Surface* marko = NULL;
 SDL_Surface* mezua = NULL;
-SDL_Surface* fondomenu = NULL;
-SDL_Surface* fondomenuCopy = NULL;
+SDL_Surface* enemigo_irudia = NULL;
+SDL_Surface* bala_rota = NULL;
 
-extern TTF_Font *font;
+extern TTF_Font* font;
+extern SDL_Rect player_posicion;
+extern SDL_Rect marko_posicion;
 
 SDL_Surface* loadMediaUnit(SDL_Surface* surface, char path[])
 {
+    SDL_FreeSurface(surface);
     surface = SDL_LoadBMP(path);
     SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, 255, 255, 255));
     if (surface == NULL)
@@ -77,22 +78,15 @@ void close()
 
 int loadMedia()
 {
-    //Loading success flag
     int success = 1;
 
-    //Load splash image
     playerP1 = loadMediaUnit(playerP1, ".//img//aurretik_1.bmp");
-    playerP2 = loadMediaUnit(playerP2, ".//img//aurretik_2.bmp");
-    playerP3 = loadMediaUnit(playerP3, ".//img//aurretik_3.bmp");
-    playerP4 = loadMediaUnit(playerP4, ".//img//aurretik_4.bmp");
-    playerP5 = loadMediaUnit(playerP5, ".//img//aurretik_5.bmp");
-    playerP6 = loadMediaUnit(playerP6, ".//img//aurretik_6.bmp");
-    bala = loadMediaUnit(bala, ".//img//bala.bmp");
+    bala = loadMediaUnit(bala, ".//img//bala_abajo.bmp");
     background = loadMediaUnit(background, ".//img//bg.bmp");
     backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//bg.bmp");
-    fondomenu = loadMediaUnit(fondomenu, ".//img//menuprueba.bmp");
-    fondomenuCopy = loadMediaUnit(fondomenuCopy, ".//img//menuprueba.bmp");
-
+    enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//enemigo_zombi1.bmp");
+    bala_rota = loadMediaUnit(bala_rota, ".//img//bala_rota.bmp");
+    marko = loadMediaUnit(marko, ".//img//mezua.bmp");
     TTF_Init();
     font = TTF_OpenFont(".//fonts//sans.ttf", 24);
     if (font == NULL)
@@ -102,4 +96,26 @@ int loadMedia()
     }
 
     return success;
+}
+void inizializazioa(){
+    if (!init())
+    {
+        printf("Failed to initialize!\n");
+        quit = 1;
+    }
+    //Load media
+    TTF_Init();
+    if (!loadMedia())
+    {
+        printf("Failed to load media!\n");
+        quit = 1;
+    }
+    audioInit();
+    loadTheMusic(JOKOA_SOUND);
+    playMusic();
+    player_posicion.x = 300;
+    player_posicion.y = 300;
+
+    marko_posicion.x = 700;
+    marko_posicion.y = 410;
 }

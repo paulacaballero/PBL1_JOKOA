@@ -1,4 +1,6 @@
 #include <SDL.h>
+#include "inizializatu.h"
+#include "soinua.h"
 
 int mapaX = 1;
 int mapaY = 2;
@@ -7,14 +9,17 @@ extern SDL_Surface* background;
 extern SDL_Surface* backgroundCopy;
 
 extern int posX, posY;
-int ipar=0, eki = 0,mende = 0,hego = 0;
+int ipar, eki,mende,hego;
 
-
+extern int enemigoGela;
 
 void mapak()
 {
-    SDL_FreeSurface(background);
-    SDL_FreeSurface(backgroundCopy);
+    ipar = 0;
+    hego = 0;
+    eki = 0;
+    mende = 0;
+    enemigoGela = 0;
     switch (mapaY)
     {
     case 1:
@@ -22,49 +27,36 @@ void mapak()
         switch (mapaX)
         {
         case 2:
-            background = SDL_LoadBMP(".//img//bg.bmp");
-         
-            backgroundCopy = SDL_LoadBMP(".//img//bg.bmp");
-            
+            background = loadMediaUnit(background, ".//img//tienda_3.bmp");
+            backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//tienda_3.bmp");
             hego = 1;
             break;
         case 3:
-            background = SDL_LoadBMP(".//img//bg.bmp");
-            
-            backgroundCopy = SDL_LoadBMP(".//img//bg.bmp");
-            
+            background = loadMediaUnit(background, ".//img//tienda_3.bmp");
+            backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//tienda_3.bmp");
             hego = 1;
             break;
         }
+        break;
     case 2:
         switch (mapaX)
         {
         case 1:
             //hasiera
-            background = SDL_LoadBMP(".//img//bg.bmp");
-            backgroundCopy = SDL_LoadBMP(".//img//bg.bmp");
+            background = loadMediaUnit(background, ".//img//bg.bmp");
+            backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//bg.bmp");
             eki = 1;
             break;
         case 2:
             //lobby 1
-            background = SDL_LoadBMP(".//img//sala_segura_1.bmp");
-            if (background == NULL)
-            {
-                printf("Unable to load image bg.bmp! SDL Error: %s\n", SDL_GetError());
-            }
-
-            backgroundCopy = SDL_LoadBMP(".//img//sala_segura_1.bmp");
-            if (backgroundCopy == NULL)
-            {
-                printf("Unable to load image bg.bmp! SDL Error: %s\n", SDL_GetError());
-            }
+            background = loadMediaUnit(background, ".//img//sala_segura_1.bmp");
+            backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//sala_segura_1.bmp");
             ipar = eki = mende = hego = 1;
             break;
         case 3:
             //lobby 2
-            background = SDL_LoadBMP(".//img//sala_segura_1.bmp");
-            backgroundCopy = SDL_LoadBMP(".//img//sala_segura_1.bmp");
-           
+            background = loadMediaUnit(background, ".//img//sala_segura_1.bmp");
+            backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//sala_segura_1.bmp");
             ipar = eki = mende = hego = 1;
             break;
         case 4:
@@ -72,100 +64,59 @@ void mapak()
             mende = 1;
             break;
         }
-
+        break;
     case 3:
         switch (mapaX)
         {
         case 2:
             //minijuegos 1
+            background = loadMediaUnit(background, ".//img//cueva_v0.bmp");
+            backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//cueva_v0.bmp");
+            audioTerminate();
+            loadTheMusic(".//music//battle_theme.wav");
             ipar = 1;
+            enemigoGela = 1;
             break;
         case 3:
             //minijuegos 2
+            background = loadMediaUnit(background, ".//img//cueva_v0.bmp");
+            backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//cueva_v0.bmp");
             ipar = 1;
+            enemigoGela = 1;
             break;
         }
+        break;
     }
-
-
 }
-/*
-int ateak() {
-    if (posY >= 200 && posY <= 250) {
-        if (mapaX != 1 && mapaY != 1 && mapaY != 3) {
-            //puerta izquierda
-            if (posX <= 100) {
-                mapaX -= 1;
-                posX = 900;
-                return 1;
-            }
-        }
-        if (mapaY != 1 && mapaY != 4) {
-            //puerta derecha
-            //if (!giltza) popup(BLOCKED_DOOR); else{
-            if (posX >= 910) {
-                mapaX += 1;
-                posX = 110;
-                return 1;
-            }
-        }
-    }
-
-    if (posX >= 480 && posX <= 550) {
-        if (mapaX != 1) {
-            if (mapaY != 1) {
-                //puerta arriba
-                if (posY <= 50) {
-                    mapaY -= 1;
-                    posY = 380;
-                    return 1;
-                }
-            }
-            if (mapaY != 3) {
-                //puerta abajo
-                if (posY >= 388) {
-                    mapaY += 1;
-                    posY = 60;
-                    return 1;
-                }
-            }
-        }
-    }
-    mapak();
-
-    return 0;
-}
-
-*/
-
 
 void ateak()
 {
-    if (posY < 250 && posY>200)
+    if (posY < 250 && posY>190)
     {
-        if (posX < 70)
+        if (posX < 40)
         {
             mapaX -= 1;
-            posX = 908;
+            posX = 959;
         }
-        if (posX > 940)
+        if (posX > 961)
         {
             mapaX += 1;
-            posX = 102;
+            posX = 50;
         }
     }
-    if (posX < 550 && posX>480)
+    if (posX < 560 && posX>470)
     {
-        if (posY < 20)
+        if (posY < 0)
         {
             mapaY -= 1;
-            posY = 390;
+            posY = 450;
         }
-        if (posY > 420)
+        if (posY > 460)
         {
             mapaY += 1;
-            posY = 102;
+            posY = 20;
         }
     }
     mapak();
+    
 }

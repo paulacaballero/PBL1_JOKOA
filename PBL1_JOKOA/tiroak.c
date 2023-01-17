@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include "marraztu.h"
 #include "colisiones.h"
+#include "inizializatu.h"
 
 int balakX[10];
 int balakY[10];
@@ -13,7 +14,7 @@ extern int posX, posY;
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 608;
 
-extern SDL_Surface *bala;
+extern SDL_Surface* bala;
 extern SDL_Rect bala_posicion;
 
 enum direkzioak { BEHERA, GORA, EZK, ESK };
@@ -76,6 +77,21 @@ void balakMarraztu()
         {
             bala_posicion.x = balakX[i];
             bala_posicion.y = balakY[i];
+            switch (balakNorabidea[i])
+            {
+            case GORA:
+                bala = loadMediaUnit(bala, ".//img//bala_arriba.bmp");
+                break;
+            case BEHERA:
+                bala = loadMediaUnit(bala, ".//img//bala_abajo.bmp");
+                break;
+            case EZK:
+                bala = loadMediaUnit(bala, ".//img//bala_izquierda.bmp");
+                break;
+            case ESK:
+                bala = loadMediaUnit(bala, ".//img//bala_derecha.bmp");
+                break;
+            }
             irudiaMarraztu(bala, bala_posicion);
         }
     }

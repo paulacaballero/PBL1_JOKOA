@@ -42,6 +42,12 @@
     <ClCompile Include="menu.c">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="enemigos.c">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="soinua.c">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gertaerak.h">
@@ -68,13 +74,10 @@
     <ClInclude Include="menu.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="enemigos.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="resource1.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="resource2.h">
+    <ClInclude Include="soinua.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,9 +6,8 @@
 void irudiaMarraztu(SDL_Surface* irudia, SDL_Rect posizioa);
 void jokalariaMarraztu();
 void alerta(char* textua);
-/*
-void menuaMarraztu();
-void menua();
-*/
+void pantailaGarbitu();
+void balaKolizioAnimazioa(int px, int py);
+
 
 #endif

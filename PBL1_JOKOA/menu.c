@@ -5,8 +5,7 @@ extern const int SCREEN_WIDTH, SCREEN_HEIGHT;
 extern SDL_Surface* fondomenu;
 extern SDL_Surface* fondomenuCopy;
 /*
-*/
-void menuaMarraztu() {
+* void menuaMarraztu() {
 	SDL_FreeSurface(fondomenu);
 	SDL_FreeSurface(fondomenuCopy);
 	fondomenu = SDL_LoadBMP(".//img//menuprueba.bmp");
@@ -19,3 +18,4 @@ void menua() {
 	menuaMarraztu();
 	
 }
+*/
