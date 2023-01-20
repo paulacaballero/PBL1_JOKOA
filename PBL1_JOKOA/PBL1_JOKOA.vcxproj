@@ -133,29 +133,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="armero.c" />
     <ClCompile Include="colisiones.c" />
+    <ClCompile Include="dirua.c" />
     <ClCompile Include="enemigos.c" />
+    <ClCompile Include="gameover.c" />
     <ClCompile Include="gertaerak.c" />
+    <ClCompile Include="huella.c" />
     <ClCompile Include="inizializatu.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="mapak.c" />
     <ClCompile Include="marraztu.c" />
     <ClCompile Include="menu.c" />
+    <ClCompile Include="naturalista.c" />
+    <ClCompile Include="props.c" />
     <ClCompile Include="soinua.c" />
     <ClCompile Include="tiroak.c" />
     <ClCompile Include="update.c" />
+    <ClCompile Include="vida.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="armero.h" />
     <ClInclude Include="colisiones.h" />
+    <ClInclude Include="dirua.h" />
     <ClInclude Include="enemigos.h" />
+    <ClInclude Include="gameover.h" />
     <ClInclude Include="gertaerak.h" />
+    <ClInclude Include="huella.h" />
     <ClInclude Include="inizializatu.h" />
     <ClInclude Include="mapak.h" />
     <ClInclude Include="marraztu.h" />
     <ClInclude Include="menu.h" />
+    <ClInclude Include="naturalista.h" />
+    <ClInclude Include="props.h" />
     <ClInclude Include="soinua.h" />
     <ClInclude Include="tiroak.h" />
     <ClInclude Include="update.h" />
+    <ClInclude Include="vida.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

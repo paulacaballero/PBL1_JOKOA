@@ -4,9 +4,53 @@
 #include "soinua.h"
 
 
-Mix_Chunk* soinuak[MAX_SOUNDS];
+Mix_Chunk* disparo;
+Mix_Chunk* hil;
+char karga[MAX_SOUNDS];
 int soinuKop = 0;
 Mix_Music* musika = NULL;
+int battleMusicOn = 1;
+int mainMusicOn = 0;
+int id;
+int loadD = 0;
+int loadH = 0;
+void soinuaDisparo() {
+    
+    if (loadH == 0) {
+        hil = Mix_LoadWAV(DISPARO);
+        loadH = 1;
+    }
+    Mix_PlayChannel(-1, disparo, 0);
+}
+void soinuaHil() {
+    if (loadH == 0) {
+        hil = Mix_LoadWAV(HIL);
+        loadH = 1;
+    }
+    Mix_PlayChannel(-1, hil, 0);
+}
+
+void musikaAldaketa(int soinua) {
+    
+    if (soinua == 1) {
+        if (mainMusicOn!=1) {
+            audioInit();
+            loadTheMusic(MAIN_MUSIC);
+            playMusic();
+            mainMusicOn = 1;
+            battleMusicOn = 0;
+        }
+    }
+    if (soinua == 0) {
+        if (battleMusicOn!=1) {
+            audioInit();
+            loadTheMusic(BATTLE_MUSIC);
+            playMusic();
+            mainMusicOn = 0;
+            battleMusicOn = 1;
+        }
+    }
+}
 
 void audioInit()
 {
@@ -15,64 +59,6 @@ void audioInit()
         printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
     }
 }
-void audioTerminate(void)
-{
-    Mix_HaltChannel(-1);
-    soundsUnload();
-    musicUnload();  
-    Mix_Quit();
-}
-int playSound(int idSound)
-{
-    if ((idSound <= 0) && (idSound >= soinuKop)) return -1;
-    Mix_PlayChannel(0, soinuak[idSound], 0);
-    return idSound;
-}
-void toggleMusic(void)
-{
-    if (musika != NULL)
-    {
-        if (Mix_PlayingMusic() != 0)
-        {
-            if (Mix_PausedMusic()) Mix_ResumeMusic();
-            else Mix_PauseMusic();
-        }
-        else playMusic();
-    }
-}
-
-void musicUnload(void)
-{
-    if (musika != NULL)
-    {
-        Mix_HaltMusic();
-        Mix_FreeMusic(musika);
-    }
-}
-
-void soundsUnload()
-{
-    int i;
-
-    for (i = 0; i < soinuKop; i++)
-    {
-        Mix_FreeChunk(soinuak[i]);
-        soinuak[i] = NULL;
-    }
-    soinuKop = 0;
-}
-int loadSound(char* fileName)
-{
-    if (soinuKop == MAX_SOUNDS) return -1;
-    if ((soinuak[soinuKop] = Mix_LoadWAV(fileName)) == NULL)
-    {
-        printf("Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError());
-        return -1;
-    }
-    soinuKop++;
-    return soinuKop - 1;
-}
-
 int loadTheMusic(char* fileName)
 {
     int wasPlaying = 0;

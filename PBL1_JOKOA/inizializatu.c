@@ -1,9 +1,6 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <stdio.h>
-#include "soinua.h"
-
-#define JOKOA_SOUND ".\\music\\main_theme.wav"
 
 extern const int SCREEN_WIDTH, SCREEN_HEIGHT;
 extern int quit;
@@ -18,6 +15,20 @@ SDL_Surface* marko = NULL;
 SDL_Surface* mezua = NULL;
 SDL_Surface* enemigo_irudia = NULL;
 SDL_Surface* bala_rota = NULL;
+SDL_Surface* titulo = NULL;
+SDL_Surface* bStart = NULL;
+SDL_Surface* bSalir = NULL;
+SDL_Surface* bMejorarArma = NULL;
+SDL_Surface* bSalirArmero = NULL;
+SDL_Surface* vidaU = NULL;
+SDL_Surface* recuadroVida = NULL;
+SDL_Surface* moneda = NULL;
+SDL_Surface* monedaE = NULL;
+SDL_Surface* mejoraU = NULL;
+SDL_Surface* huellaU = NULL;
+SDL_Surface* puestito = NULL;
+SDL_Surface* mejoraArmaImagen = NULL;
+SDL_Surface* gameOverTitulo = NULL;
 
 extern TTF_Font* font;
 extern SDL_Rect player_posicion;
@@ -84,11 +95,24 @@ int loadMedia()
     bala = loadMediaUnit(bala, ".//img//bala_abajo.bmp");
     background = loadMediaUnit(background, ".//img//bg.bmp");
     backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//bg.bmp");
-    enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//enemigo_zombi1.bmp");
+    enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//basura1.bmp");
     bala_rota = loadMediaUnit(bala_rota, ".//img//bala_rota.bmp");
-    marko = loadMediaUnit(marko, ".//img//mezua.bmp");
-    TTF_Init();
-    font = TTF_OpenFont(".//fonts//sans.ttf", 24);
+    titulo = loadMediaUnit(titulo, ".//img//logo.bmp");
+    bStart = loadMediaUnit(bStart, ".//img//botonStart.bmp");
+    bSalir = loadMediaUnit(bSalir, ".//img//botonSalir.bmp");
+    vidaU = loadMediaUnit(vidaU, ".//img//vida.bmp");
+    recuadroVida = loadMediaUnit(recuadroVida, ".//img//recuadroVida.bmp");
+    moneda = loadMediaUnit(moneda, ".//img//moneda.bmp");
+    monedaE = loadMediaUnit(monedaE, ".//img//moneda4.bmp");
+    bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas1.bmp");
+    bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX1.bmp");
+    marko = loadMediaUnit(marko, ".//img//marco_v0.bmp");
+    mejoraU = loadMediaUnit(mejoraU, ".//img//mejoraU2.bmp");
+    huellaU = loadMediaUnit(huellaU, ".//img//huellaU.bmp");
+    puestito = loadMediaUnit(puestito, ".//img//puestito1.bmp");
+    mejoraArmaImagen = loadMediaUnit(mejoraArmaImagen, ".//img//mejoraArmaImagen.bmp");
+    gameOverTitulo = loadMediaUnit(gameOverTitulo, ".//img//gameOver.bmp");
+    font = TTF_OpenFont(".//fonts//sans.ttf", 35);
     if (font == NULL)
     {
         printf("Unable to load font Sans.ttf! SDL Error: %s\n", SDL_GetError());
@@ -97,7 +121,9 @@ int loadMedia()
 
     return success;
 }
-void inizializazioa(){
+
+void inizializazioa()
+{
     if (!init())
     {
         printf("Failed to initialize!\n");
@@ -110,12 +136,10 @@ void inizializazioa(){
         printf("Failed to load media!\n");
         quit = 1;
     }
-    audioInit();
-    loadTheMusic(JOKOA_SOUND);
-    playMusic();
+
     player_posicion.x = 300;
     player_posicion.y = 300;
 
-    marko_posicion.x = 700;
-    marko_posicion.y = 410;
+    marko_posicion.x = 300;
+    marko_posicion.y = 300;
 }

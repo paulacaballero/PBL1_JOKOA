@@ -1,5 +1,6 @@
-#ifndef MENU
+#ifndef MENUA
+#define MENUA
 
-void menuaMarraztu();
-void menua();
+void menu();
+
 #endif

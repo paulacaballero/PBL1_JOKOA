@@ -1,15 +1,28 @@
 #include <SDL.h>
+#include <math.h>
 #include "mapak.h"
 #include "marraztu.h"
-#include "update.h"
+#include "enemigos.h"
+#include "dirua.h"
+#include "soinua.h"
 
-#define MEZUA_ATEA "atea"
+
 
 extern const int SCREEN_WIDTH, SCREEN_HEIGHT;
 extern int balakX[], balakY[], balakA[], balakDim;
 extern int ipar, eki, hego, mende;
-extern int posX, posY;
-extern int mapaX, mapaY;
+
+extern int monedakA[], monedakX[], monedakY[], diruKant;
+
+extern int enemigoX[], enemigoY[], enemigoHP[], enemigoDim;
+extern int t, azkenDamageT;
+
+extern int hp, invulnerable, quit, died;
+
+extern int posX, posY,mapaX,mapaY;
+
+int daño = 1;
+int dañoEnemigos = 1;
 
 void balaKolizioak(int i)
 {
@@ -25,8 +38,25 @@ void balaKolizioak(int i)
     }
 }
 
+void karratutikAtera(int x0, int x1, int y0, int y1)
+{
+    if (fabs(posX + 59 - x0) <= 5) posX -= 5;
+    else if (fabs(posX + 7 - x1) <= 5) posX += 5;
+    else if (fabs(posY + 100 - y0) <= 5) posY -= 5;
+    else if (fabs(posY + 51 - y1) <= 5) posY += 5;
+}
+
+void jokalariKolizioKarratua(int x0, int x1, int y0, int y1)
+{
+    if (posX + 59 > x0 && posX + 7 < x1 && posY + 100 > y0 && posY + 51 < y1)
+    {
+        karratutikAtera(x0, x1, y0, y1);
+    }
+}
+
 void jokalariKolizioak()
 {
+
     if (posX < 100)
     {
         if (mende)
@@ -65,10 +95,53 @@ void jokalariKolizioak()
     ateak();
 }
 
-void mezuaAgertu() {
+void monedakKolizioak(int i)
+{
+    if (fabs(monedakX[i] - posX - 24) < 35 && fabs(monedakY[i] - posY - 61) < 35 && monedakA[i])
+    {
+        monedakA[i] = 0;
+        diruKant++;
+    }
+}
+
+void enemigoKolisioak(int i)
+{
+    int j;
+
+    for (j = 0; j < 10; j++)
+    {
+        if (fabs(enemigoX[i] - balakX[j] + 21) < 30 && fabs(enemigoY[i] - balakY[j] + 37) < 30 && balakA[j])
+        {
+            balaKolizioAnimazioa(balakX[j], balakY[j]);
+
+            enemigoHP[i] -= daño;
+            balakA[j] = 0;
+        }
+    }
+
+    if (fabs(enemigoX[i] - posX - 3) < 35 && (enemigoY[i] - posY - 28) < 35 && !invulnerable)
+    {
+        hp--;
+        invulnerable = 1;
+        azkenDamageT = t;
+    }
+
+    if (t - azkenDamageT > 100) invulnerable = 0;
+
+    if (enemigoHP[i] <= 0)
+    {
+        spawnMoneda(enemigoX[i], enemigoY[i]);
+        batBorratu(enemigoX, i, enemigoDim);
+        batBorratu(enemigoY, i, enemigoDim);
+        batBorratu(enemigoHP, i, enemigoDim);
+        soinuaHil();
+        enemigoDim--;
+    }
+}
+void mezuaAgertu(char* mezua, int x, int y) {
     if (mapaX == 2 && mapaY == 2) {
-        if ((posX < 470 && posX>280) && (posY < 393 && posY>280)) {
-            alerta(MEZUA_ATEA);
+        if ((posX < 470 && posX>280) && (posY < 393 && posY>350)) {
+            alerta(mezua,x,y);
         }
     }
 }

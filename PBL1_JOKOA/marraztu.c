@@ -2,7 +2,7 @@
 #include <SDL_ttf.h>
 #include "inizializatu.h"
 #include "update.h"
-extern int t;
+
 
 extern int mugitzen;
 
@@ -20,8 +20,6 @@ extern SDL_Surface* mezua;
 extern SDL_Surface* backgroundCopy;
 extern SDL_Surface* bala_rota;
 
-extern SDL_Surface* fondomenu;
-extern SDL_Surface* fondomenuCopy;
 
 TTF_Font* font = NULL;
 SDL_Color black = { 0, 0, 0 };
@@ -29,6 +27,7 @@ SDL_Color black = { 0, 0, 0 };
 SDL_Rect player_posicion;
 SDL_Rect bala_posicion;
 SDL_Rect marko_posicion;
+SDL_Rect testua_posicion;
 
 enum direkzioak { BEHERA, GORA, EZK, ESK };
 
@@ -36,6 +35,14 @@ void irudiaMarraztu(SDL_Surface* irudia, SDL_Rect posizioa)
 {
     SDL_BlitSurface(irudia, NULL, background, &posizioa);
     //SDL_UpdateWindowSurface(window);
+}
+void zerbaitMarraztu(SDL_Surface* irudia, int px, int py)
+{
+    SDL_Rect posizioa;
+    posizioa.x = px;
+    posizioa.y = py;
+
+    irudiaMarraztu(irudia, posizioa);
 }
 
 void jokalariaMarraztu()
@@ -109,16 +116,21 @@ void jokalariaMarraztu()
     }
     irudiaMarraztu(playerP1, player_posicion);
 }
-void alerta(char* textua)
-{
-    //marko = SDL_LoadBMP(".//img//mezua.bmp");
-    marko = loadMediaUnit(marko, ".//img//mezua(1).bmp");
-    mezua = TTF_RenderText_Solid(font, textua, black);
 
-    irudiaMarraztu(mezua, marko_posicion);
+void alerta(char* textua,int x, int y)
+{
+   
+    marko_posicion.x = x;
+    marko_posicion.y = y;
+    testua_posicion.x = x + 30;
+    testua_posicion.y = y + 30;
+    marko = loadMediaUnit(marko, ".//img//marco_v0.bmp");
+    SDL_FreeSurface(mezua);
+    mezua = TTF_RenderText_Solid(font, textua, black);
+   
     irudiaMarraztu(marko, marko_posicion);
+    irudiaMarraztu(mezua, testua_posicion);
   
-    
     
 }
 void pantailaGarbitu()

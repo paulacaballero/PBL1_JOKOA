@@ -4,6 +4,8 @@
 #include "tiroak.h"
 #include "marraztu.h"
 #include "inizializatu.h"
+#include "dirua.h"
+#include "colisiones.h"
 
 extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
@@ -18,7 +20,6 @@ int enemigoGela = 0;
 
 int enemigoX[20];
 int enemigoY[20];
-int enemigoA[20];
 int enemigoHP[20];
 int enemigoDim = 0;
 int enemigoAbiadura = 1;
@@ -26,6 +27,12 @@ int enemigoAbiadura = 1;
 extern int balakX[10];
 extern int balakY[10];
 extern int balakA[10];
+extern int hp;
+extern int dañoEnemigos;
+
+int invulnerable = 0;
+int azkenDamageT = 0;
+int enemigoHpMax = 5;
 
 SDL_Rect enemigo_posicion;
 
@@ -40,41 +47,15 @@ void batBorratu(int b[], int pos, int dim)
     }
 }
 
-void enemigoKolisioak(int i)
-{
-    int j;
-
-    for (j = 0; j < 10; j++)
-    {
-        if (fabs(enemigoX[i] - balakX[j]) < 10 && fabs(enemigoY[i] - balakY[j]) < 10)
-        {
-            if (balakA[j]) balaKolizioAnimazioa(balakX[j], balakY[j]);
-
-            enemigoHP[i] -= 1;
-            balakA[j] = 0;
-        }
-    }
-
-    if (enemigoHP[i] == 0)
-    {
-        batBorratu(enemigoX, i, enemigoDim);
-        batBorratu(enemigoY, i, enemigoDim);
-        batBorratu(enemigoHP, i, enemigoDim);
-        enemigoDim--;
-    }
-}
-
 void spawnEnemy()
 {
     bat_mugitu(enemigoX, enemigoDim);
     bat_mugitu(enemigoY, enemigoDim);
-    bat_mugitu(enemigoA, enemigoDim);
     bat_mugitu(enemigoHP, enemigoDim);
 
-    enemigoX[0] = rand() % (SCREEN_WIDTH + 1);
+    enemigoX[0] = rand() % (SCREEN_WIDTH - 200) + 100;
     enemigoY[0] = rand() % 200 + SCREEN_HEIGHT + 200;
-    enemigoHP[0] = rand() % 4 + 2;
-    enemigoA[0] = 1;
+    enemigoHP[0] = rand() % enemigoHpMax + 1;
 
     enemigoDim++;
 }
@@ -129,27 +110,64 @@ void enemigoakMarraztu()
     int i;
     for (i = 0; i < enemigoDim; i++)
     {
-        if (enemigoA[i])
+        enemigo_posicion.x = enemigoX[i];
+        enemigo_posicion.y = enemigoY[i];
+        int pausoa = t % 20;
+        if (pausoa < 5) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//basura1.bmp");
+        else if (pausoa < 10) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//basura2.bmp");
+        else if (pausoa < 15) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//basura3.bmp");
+        else if (pausoa < 20) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//basura2.bmp");
+        irudiaMarraztu(enemigo_irudia, enemigo_posicion);
+    }
+}
+void enemigoakMarraztu2()
+{
+    int i;
+    for (i = 0; i < enemigoDim; i++)
+    {
+        enemigo_posicion.x = enemigoX[i];
+        enemigo_posicion.y = enemigoY[i];
+        int pausoa = t % 20;
+        int direkzioa = direkzioaLortu(enemigoX[i], enemigoY[i]);
+        if (direkzioa == GORA || direkzioa == EZK)
         {
-            enemigo_posicion.x = enemigoX[i];
-            enemigo_posicion.y = enemigoY[i];
-            int pausoa = t % 25;
-            if (pausoa < 5) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//enemigo_zombi1.bmp");
-            else if (pausoa < 10) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//enemigo_zombi2.bmp");
-            else if (pausoa < 15) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//enemigo_zombi3.bmp");
-            else if (pausoa < 20) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//enemigo_zombi4.bmp");
-            else if (pausoa < 25) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//enemigo_zombi5.bmp");
-            irudiaMarraztu(enemigo_irudia, enemigo_posicion);
+            if (pausoa < 5) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//e_minero1.bmp");
+            else if (pausoa < 10) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//e_minero2.bmp");
+            else if (pausoa < 15) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//e_minero3.bmp");
+            else if (pausoa < 20) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//e_minero4.bmp");
         }
+        else if (direkzioa == BEHERA || direkzioa == ESK)
+        {
+            if (pausoa < 5) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//minero1.bmp");
+            else if (pausoa < 10) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//minero2.bmp");
+            else if (pausoa < 15) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//minero3.bmp");
+            else if (pausoa < 20) enemigo_irudia = loadMediaUnit(enemigo_irudia, ".//img//minero4.bmp");
+        }
+        irudiaMarraztu(enemigo_irudia, enemigo_posicion);
     }
 }
 
 void enemigoak()
 {
-    if (enemigoGela)
+    if (enemigoGela == 1)
     {
+        enemigoHpMax = 5;
+        dañoEnemigos = 1;
         if (t % 50 == 0 && enemigoDim < 20) spawnEnemy();
         moveEnemy();
         enemigoakMarraztu();
     }
+    else if (enemigoGela == 2)
+    {
+        enemigoHpMax = 20;
+        dañoEnemigos = 3;
+        if (t % 25 == 0 && enemigoDim < 20) spawnEnemy();
+        moveEnemy();
+        enemigoakMarraztu2();
+    }
+}
+
+void resetEnemies()
+{
+    enemigoDim = 0;
 }

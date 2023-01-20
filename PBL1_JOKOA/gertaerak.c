@@ -4,8 +4,10 @@
 #include "marraztu.h"
 #include "update.h"
 #include "tiroak.h"
+#include "soinua.h"
+#include "armero.h"
+#include "menu.h"
 
-#define BLOCKED_DOOR "Ate hau itxita dago. Giltza nonbait egon beharko du..."
 
 extern const int SCREEN_HEIGHT, SCREEN_WIDTH;
 
@@ -21,6 +23,9 @@ int azkenTiroT = 0;
 enum direkzioak { BEHERA, GORA, EZK, ESK };
 int player_dir = BEHERA;
 
+extern int menuQuit;
+extern int mapaY;
+extern int armeroQuit;
 
 
 void handleEvents()
@@ -35,8 +40,11 @@ void handleEvents()
        
     }
 
-    if (keystates[SDL_SCANCODE_ESCAPE]) quit = 1;
-
+    if (keystates[SDL_SCANCODE_ESCAPE])
+    {
+        menuQuit = 0;
+        menu();
+    }
     mugitzen = 0;
     
     if (keystates[SDL_SCANCODE_W])
@@ -70,26 +78,48 @@ void handleEvents()
         tiroEgin(GORA);
         tiro = 0;
         azkenTiroT = t;
+        soinuaDisparo();
     }
     else if (keystates[SDL_SCANCODE_DOWN] && tiro)
     {
         tiroEgin(BEHERA);
         tiro = 0;
         azkenTiroT = t;
+        soinuaDisparo();
     }
     else if (keystates[SDL_SCANCODE_LEFT] && tiro)
     {
         tiroEgin(EZK);
         tiro = 0;
         azkenTiroT = t;
+        soinuaDisparo();
     }
     else if (keystates[SDL_SCANCODE_RIGHT] && tiro)
     {
         tiroEgin(ESK);
         tiro = 0;
         azkenTiroT = t;
+        soinuaDisparo();
     }
 
     if (t - azkenTiroT >= 15) tiro = 1;
+    if (mapaY == 1)
+    {
+        if (posX + 59 > 290 && posX + 7 < 430 && posY + 51 < 300 && posY + 100 > 270)
+        {
+            if (keystates[SDL_SCANCODE_F])
+            {
+                armeroQuit = 0;
+                menuArmero();
+            }
+        }
+        else if (posX + 59 > 700 && posX + 7 < 780 && posY + 51 < 200 && posY + 100 > 180)
+        {
+            if (keystates[SDL_SCANCODE_F])
+            {
+                landareakAldatu();
+            }
+        }
+    }
 }
 

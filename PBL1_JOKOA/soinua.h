@@ -2,17 +2,18 @@
 #define SOINUA_H
 
 #define MAX_SOUNDS 10
+#define MAIN_MUSIC ".//music//main_theme.wav"
+#define BATTLE_MUSIC ".//music//battle_theme.wav"
+#define DISPARO ".//music//slime_disparo.wav"
+#define HIL ".//music//hit.wav"
+#define PLANTA ".//music//coin.wav"
 
 #include <SDL_mixer.h>
 
 void audioInit();
-int loadSound(char* fileName);
 int loadTheMusic(char* fileName);
-int playSound(int idSound);
 int playMusic(void);
-void toggleMusic(void);
-void audioTerminate();
-void musicUnload(void);
-void soundsUnload();
-
+void musikaAldaketa(int soinua);
+void soinuaDisparo();
+void soinuaHil();
 #endif 
