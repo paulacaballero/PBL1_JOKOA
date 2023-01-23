@@ -7,8 +7,9 @@
 #include "update.h"
 #include "colisiones.h"
 #include "dirua.h"
+#include "vida.h"
+#include "huella.h"
 
-extern SDL_Surface* markoL;
 extern SDL_Surface* markoS;
 extern SDL_Surface* bMejorarArma;
 extern SDL_Surface* bSalirArmero;
@@ -21,11 +22,16 @@ extern SDL_Color black;
 SDL_Color red = { 255, 0, 0 };
 
 int armeroQuit = 0;
-extern int quit, t, diruEKant, daño,mapaX,mapaY;
+extern int quit, t, diruEKant, daño, hp, hpMax;
 
 int nivelArma = 1;
 int mejoraKostua = 10;
 int azkenMejoraT = 0;
+
+int nivelVida = 1;
+int mejoraKostuaVida = 10;
+
+extern int mapaX, mapaY;
 
 void textuaIdatzi(char* txt, int px, int py)
 {
@@ -42,19 +48,32 @@ void mejorarArma()
     daño += 1;
 }
 
+void mejorarVida()
+{
+    nivelVida++;
+    diruEKant -= mejoraKostuaVida;
+    mejoraKostuaVida += 5;
+    hpMax += 2;
+    hp = hpMax;
+}
+
 void marraztuNivelMejora(int px, int py)
 {
     int i;
+    int nivelDeMejora;
+
+    if (mapaX == 2) nivelDeMejora = nivelArma;
+    else nivelDeMejora = nivelVida;
 
     mejoraU = loadMediaUnit(mejoraU, ".//img//mejoraU2.bmp");
-    for (i = 0; i < nivelArma; i++)
+    for (i = 0; i < nivelDeMejora; i++)
     {
         zerbaitMarraztu(mejoraU, px, py);
         px += 12;
     }
 
     mejoraU = loadMediaUnit(mejoraU, ".//img//mejoraU1.bmp");
-    for (i = nivelArma; i < 10; i++)
+    for (i = nivelDeMejora; i < 10; i++)
     {
         zerbaitMarraztu(mejoraU, px, py);
         px += 12;
@@ -71,15 +90,16 @@ int armeroEvents()
 
     while (SDL_PollEvent(&e) != 0)
     {
-        if (e.type == SDL_QUIT) quit = 1;
+        if (e.type == SDL_QUIT) quit = armeroQuit = 1;
     }
 
     if (mouseX > 570 && mouseX < 570 + 61 && mouseY > 270 && mouseY < 331)
     {
         state = 1;
-        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenMejoraT >= 50)
+        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenMejoraT >= 30)
         {
-            if (diruEKant >= mejoraKostua && nivelArma < 10) mejorarArma();
+            if (mapaX == 2 && diruEKant >= mejoraKostua && nivelArma < 10) mejorarArma();
+            else if (mapaX == 3 && diruEKant >= mejoraKostuaVida && nivelVida < 10) mejorarVida();
             azkenMejoraT = t;
         }
     }
@@ -97,44 +117,46 @@ void menuArmero()
 {
     while (!armeroQuit)
     {
-        switch (mapaX) {
-        case 2:
-            pantailaGarbitu();
-            switch (armeroEvents())
-            {
-            case 0:
-                bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas1.bmp");
-                bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX1.bmp");
-                break;
-            case 1:
-                bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas2.bmp");
-                break;
-            case 2:
-                bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX2.bmp");
-                break;
-            }
-            zerbaitMarraztu(markoS, 290, 100);
-            zerbaitMarraztu(bMejorarArma, 570, 270);
-            textuaIdatzi("Zure dirua:", 330, 130);
-
-            char txt[10];
-            sprintf(txt, "%d", diruEKant);
-            textuaIdatzi(txt, 550, 130);
-            zerbaitMarraztu(mejoraArmaImagen, 477, 180);
-            textuaIdatzi("Kostua:", 330, 280);
-            sprintf(txt, "%d", mejoraKostua);
-            textuaIdatzi(txt, 475, 280);
-            zerbaitMarraztu(bSalirArmero, 710, 120);
-            marraztuNivelMejora(650, 270);
-            pantailaBerriztu();
-            SDL_Delay(10);
-            t++;
+        pantailaGarbitu();
+        switch (armeroEvents())
+        {
+        case 0:
+            bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas1.bmp");
+            bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX1.bmp");
             break;
-        case 3:
-
+        case 1:
+            bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas2.bmp");
+            break;
+        case 2:
+            bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX2.bmp");
             break;
         }
-        
+        zerbaitMarraztu(markoS, 290, 100);
+        zerbaitMarraztu(bMejorarArma, 570, 270);
+        textuaIdatzi("Zure dirua:", 330, 130);
+
+        char txt[10];
+        sprintf(txt, "%d", diruEKant);
+        textuaIdatzi(txt, 550, 130);
+
+        textuaIdatzi("Kostua:", 330, 280);
+
+        if (mapaX == 2)
+        {
+            zerbaitMarraztu(mejoraArmaImagen, 477, 180);
+            sprintf(txt, "%d", mejoraKostua);
+        }
+        else sprintf(txt, "%d", mejoraKostuaVida);;
+
+        textuaIdatzi(txt, 475, 280);
+        zerbaitMarraztu(bSalirArmero, 710, 120);
+        marraztuNivelMejora(650, 270);
+        marraztuDirua();
+        vidaMarraztu();
+        huellaMarraztu();
+        pantailaBerriztu();
+        SDL_Delay(10);
+        t++;
     }
 }
 

@@ -2,7 +2,7 @@
 #include "marraztu.h"
 #include "inizializatu.h"
 
-int huellaCarbono = 0;
+int huellaCarbono = 50;
 int huellaMax = 70;
 
 extern int t;
@@ -13,10 +13,7 @@ extern SDL_Surface* huellaU;
 
 void huellaIgo()
 {
-    if (huellaCarbono < huellaMax) {
-        if (t % 600 == 0) huellaCarbono++;
-    }
-    
+    if (t % 600 == 0) huellaCarbono++;
 }
 
 void huellaMarraztu()

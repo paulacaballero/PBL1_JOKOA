@@ -8,8 +8,8 @@
 #include <math.h>
 #include "colisiones.h"
 
-int diruKant = 0;
-int diruEKant = 0;
+int diruKant = 100;
+int diruEKant = 1000;
 
 int monedakX[20];
 int monedakY[20];

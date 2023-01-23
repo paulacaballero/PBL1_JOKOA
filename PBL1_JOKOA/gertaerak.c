@@ -28,7 +28,10 @@ int player_dir = BEHERA;
 extern int menuQuit;
 extern int mapaY,mapaX;
 extern int armeroQuit;
+extern int naturalistaQuit;
 
+extern SDL_Surface* background;
+extern SDL_Surface* backgroundCopy;
 
 void handleEvents()
 {
@@ -110,6 +113,7 @@ void handleEvents()
             if (keystates[SDL_SCANCODE_F])
             {
                 armeroQuit = 0;
+                SDL_BlitSurface(background, NULL, backgroundCopy, NULL);
                 menuArmero();
             }
         }
@@ -117,12 +121,11 @@ void handleEvents()
         {
             if (keystates[SDL_SCANCODE_F])
             {
-                landareakAldatu();
+                naturalistaQuit = 0;
+                SDL_BlitSurface(background, NULL, backgroundCopy, NULL);
+                menuNaturalista();
             }
         }
-    }
-    if (mapaY == 2 && (mapaX == 2 || mapaX == 3)) {
-        
     }
 }
 

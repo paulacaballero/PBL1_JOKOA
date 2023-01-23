@@ -5,6 +5,7 @@
 #include "enemigos.h"
 #include "dirua.h"
 #include "soinua.h"
+#include "props.h"
 
 
 
@@ -15,7 +16,7 @@ extern int ipar, eki, hego, mende;
 extern int monedakA[], monedakX[], monedakY[], diruKant;
 
 extern int enemigoX[], enemigoY[], enemigoHP[], enemigoDim;
-extern int t, azkenDamageT;
+extern int t, azkenDamageT, enemigoGela, bossGela;
 
 extern int hp, invulnerable, quit, died;
 
@@ -25,6 +26,9 @@ extern SDL_Window* window;
 int daño = 1;
 int dañoEnemigos = 1;
 int enemigosKop = 100;
+
+int vidaBoss = 1000;
+int dañoBoss = 10;
 
 void balaKolizioak(int i)
 {
@@ -94,7 +98,6 @@ void jokalariKolizioak()
         }
         else posY -= 5;
     }
-
     ateak();
 }
 
@@ -111,8 +114,30 @@ void monedakKolizioak(int i)
 void enemigoKolisioak(int i)
 {
     int j;
+    int centrox = 0;
+    int centroy = 0;
+    int dif = 0;
 
-    for (j = 0; j < 10; j++)
+    if (enemigoGela == 1)
+    {
+        centrox = -3;
+        centroy = -28;
+        dif = 35;
+    }
+    else if (enemigoGela == 2)
+    {
+        centrox = 3;
+        centroy = 1;
+        dif = 35;
+    }
+    else if (bossGela == 1)
+    {
+        centrox = -15;
+        centroy = -49;
+        dif = 25;
+    }
+
+    for (j = 0; j < balakDim; j++)
     {
         if (fabs(enemigoX[i] - balakX[j] + 21) < 30 && fabs(enemigoY[i] - balakY[j] + 37) < 30 && balakA[j])
         {
@@ -123,11 +148,22 @@ void enemigoKolisioak(int i)
         }
     }
 
-    if (fabs(enemigoX[i] - posX - 3) < 35 && (enemigoY[i] - posY - 28) < 35 && !invulnerable)
+    if (fabs(enemigoX[i] - posX + centrox) < dif && fabs(enemigoY[i] - posY + centroy) < dif && !invulnerable)
     {
-        hp--;
+        hp -= dañoEnemigos;
         invulnerable = 1;
         azkenDamageT = t;
+
+        if (bossGela)
+        {
+            enemigoHP[i] = 0;
+            drawProp(".//img//puf.bmp", enemigoX[i], enemigoY[i]);
+        }
+        if (hp <= 0)
+        {
+            quit = 1;
+            died = 1;
+        }
     }
 
     if (t - azkenDamageT > 100) invulnerable = 0;
@@ -138,13 +174,39 @@ void enemigoKolisioak(int i)
         batBorratu(enemigoX, i, enemigoDim);
         batBorratu(enemigoY, i, enemigoDim);
         batBorratu(enemigoHP, i, enemigoDim);
-        soinuaHil();
         enemigoDim--;
     }
-    if (hp <= 0) {
-        died = 1;
-        quit = 1;
+}
+void bossKolisioak(int bx, int by)
+{
+    int i;
+
+    //colisiones de las balas con el boss
+    for (i = 0; i < balakDim; i++)
+    {
+        if (fabs(bx + 137 - balakX[i]) < 100 && fabs(by + 82 - balakY[i]) < 80 && balakA[i])
+        {
+            balaKolizioAnimazioa(balakX[i], balakY[i]);
+            balakA[i] = 0;
+            vidaBoss -= daño;
+        }
     }
+
+    //colisiones con el jugador
+    if (fabs(bx + 115 - posX) < 120 && fabs(by + 18 - posY) < 85 && !invulnerable)
+    {
+        hp -= dañoBoss;
+        invulnerable = 1;
+        azkenDamageT = t;
+
+        if (hp <= 0)
+        {
+            quit = 1;
+            died = 1;
+        }
+    }
+
+    if (t - azkenDamageT > 100) invulnerable = 0;
 }
 void mezuaAgertu(char* mezua, int x, int y) {
     if ((mapaX == 2 ||mapaX==3) && mapaY == 2) {

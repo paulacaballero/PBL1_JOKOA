@@ -31,6 +31,7 @@ SDL_Surface* puestito = NULL;
 SDL_Surface* mejoraArmaImagen = NULL;
 SDL_Surface* gameOverTitulo = NULL;
 SDL_Surface* fondo = NULL;
+SDL_Surface* vidaUBoss = NULL;
 
 extern TTF_Font* font;
 extern SDL_Rect player_posicion;
@@ -108,15 +109,16 @@ int loadMedia()
     monedaE = loadMediaUnit(monedaE, ".//img//moneda4.bmp");
     bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas1.bmp");
     bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX1.bmp");
-    markoL = loadMediaUnit(markoL, ".//img//dialogo2.bmp");
-    markoS = loadMediaUnit(markoS, ".//img//marco_v0.bmp");
     mejoraU = loadMediaUnit(mejoraU, ".//img//mejoraU2.bmp");
     huellaU = loadMediaUnit(huellaU, ".//img//huellaU.bmp");
     puestito = loadMediaUnit(puestito, ".//img//puestito1.bmp");
     mejoraArmaImagen = loadMediaUnit(mejoraArmaImagen, ".//img//mejoraArmaImagen.bmp");
     gameOverTitulo = loadMediaUnit(gameOverTitulo, ".//img//gameOver.bmp");
+    markoL = loadMediaUnit(markoL, ".//img//dialogo2.bmp");
+    markoS = loadMediaUnit(markoS, ".//img//marco_v0.bmp");
     fondo = loadMediaUnit(fondo, ".//img//fondoinicio.bmp");
     font = TTF_OpenFont(".//fonts//sans.ttf", 35);
+
     if (font == NULL)
     {
         printf("Unable to load font Sans.ttf! SDL Error: %s\n", SDL_GetError());

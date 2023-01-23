@@ -19,10 +19,11 @@ extern SDL_Surface* backgroundCopy;
 
 extern Mix_Music* musika;
 
-extern int posX, posY;
+extern int posX, posY,t;
 int ipar, eki,mende,hego;
 
 extern int enemigoGela,enemigosKop;
+extern int bossGela;
 
 void mapak()
 {
@@ -32,6 +33,7 @@ void mapak()
     eki = 0;
     mende = 0;
     enemigoGela = 0;
+    bossGela = 0;
     
     switch (mapaY)
     {
@@ -171,6 +173,7 @@ void mapak()
             //final boss
             background = loadMediaUnit(background, ".//img//sala_final.bmp");
             backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//sala_final.bmp");
+            bossGela = 1;
             mende = 1;
             soinua = 2;
             break;

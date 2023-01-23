@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="armero.c" />
+    <ClCompile Include="boss.c" />
     <ClCompile Include="colisiones.c" />
     <ClCompile Include="dirua.c" />
     <ClCompile Include="enemigos.c" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="armero.h" />
+    <ClInclude Include="boss.h" />
     <ClInclude Include="colisiones.h" />
     <ClInclude Include="dirua.h" />
     <ClInclude Include="enemigos.h" />

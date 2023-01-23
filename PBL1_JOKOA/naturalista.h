@@ -3,5 +3,6 @@
 
 void naturalistaMarraztu();
 void landareakAldatu();
+void menuNaturalista();
 
 #endif

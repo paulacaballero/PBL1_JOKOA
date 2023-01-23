@@ -24,19 +24,21 @@ int enemigoHP[20];
 int enemigoDim = 0;
 int enemigoAbiadura = 1;
 
+int enemigoHpMax = 5;
+
 extern int balakX[10];
 extern int balakY[10];
 extern int balakA[10];
 extern int hp;
-extern int dañoEnemigos;
 
 int invulnerable = 0;
 int azkenDamageT = 0;
-int enemigoHpMax = 5;
 
 SDL_Rect enemigo_posicion;
 
 enum direkzioak { BEHERA, GORA, EZK, ESK };
+
+extern int dañoEnemigos;
 
 void batBorratu(int b[], int pos, int dim)
 {
@@ -88,8 +90,8 @@ void moveEnemy()
 int direkzioaLortu(int eX, int eY)
 {
     int direkzioa;
-    int difX = posX - eX;
-    int difY = posY - eY;
+    int difX = posX + 20 - eX;
+    int difY = posY + 60 - eY;
 
     if (fabs(difX) >= fabs(difY))
     {
@@ -120,6 +122,7 @@ void enemigoakMarraztu()
         irudiaMarraztu(enemigo_irudia, enemigo_posicion);
     }
 }
+
 void enemigoakMarraztu2()
 {
     int i;
@@ -153,6 +156,7 @@ void enemigoak()
     {
         enemigoHpMax = 5;
         dañoEnemigos = 1;
+        enemigoAbiadura = 2;
         if (t % 50 == 0 && enemigoDim < 20) spawnEnemy();
         moveEnemy();
         enemigoakMarraztu();
@@ -161,6 +165,7 @@ void enemigoak()
     {
         enemigoHpMax = 20;
         dañoEnemigos = 3;
+        enemigoAbiadura = 1;
         if (t % 25 == 0 && enemigoDim < 20) spawnEnemy();
         moveEnemy();
         enemigoakMarraztu2();

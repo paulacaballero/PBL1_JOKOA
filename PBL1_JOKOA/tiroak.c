@@ -3,10 +3,10 @@
 #include "colisiones.h"
 #include "inizializatu.h"
 
-int balakX[10];
-int balakY[10];
-int balakNorabidea[10];
-int balakA[10];
+int balakX[11];
+int balakY[11];
+int balakNorabidea[11];
+int balakA[11];
 int balakDim = 0;
 
 extern int posX, posY;
