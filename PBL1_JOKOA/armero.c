@@ -8,7 +8,8 @@
 #include "colisiones.h"
 #include "dirua.h"
 
-extern SDL_Surface* marko;
+extern SDL_Surface* markoL;
+extern SDL_Surface* markoS;
 extern SDL_Surface* bMejorarArma;
 extern SDL_Surface* bSalirArmero;
 extern SDL_Surface* mejoraU;
@@ -20,7 +21,7 @@ extern SDL_Color black;
 SDL_Color red = { 255, 0, 0 };
 
 int armeroQuit = 0;
-extern int quit, t, diruEKant, daño;
+extern int quit, t, diruEKant, daño,mapaX,mapaY;
 
 int nivelArma = 1;
 int mejoraKostua = 10;
@@ -96,36 +97,44 @@ void menuArmero()
 {
     while (!armeroQuit)
     {
-        pantailaGarbitu();
-        switch (armeroEvents())
-        {
-        case 0:
-            bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas1.bmp");
-            bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX1.bmp");
-            break;
-        case 1:
-            bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas2.bmp");
-            break;
+        switch (mapaX) {
         case 2:
-            bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX2.bmp");
+            pantailaGarbitu();
+            switch (armeroEvents())
+            {
+            case 0:
+                bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas1.bmp");
+                bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX1.bmp");
+                break;
+            case 1:
+                bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas2.bmp");
+                break;
+            case 2:
+                bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX2.bmp");
+                break;
+            }
+            zerbaitMarraztu(markoS, 290, 100);
+            zerbaitMarraztu(bMejorarArma, 570, 270);
+            textuaIdatzi("Zure dirua:", 330, 130);
+
+            char txt[10];
+            sprintf(txt, "%d", diruEKant);
+            textuaIdatzi(txt, 550, 130);
+            zerbaitMarraztu(mejoraArmaImagen, 477, 180);
+            textuaIdatzi("Kostua:", 330, 280);
+            sprintf(txt, "%d", mejoraKostua);
+            textuaIdatzi(txt, 475, 280);
+            zerbaitMarraztu(bSalirArmero, 710, 120);
+            marraztuNivelMejora(650, 270);
+            pantailaBerriztu();
+            SDL_Delay(10);
+            t++;
+            break;
+        case 3:
+
             break;
         }
-        zerbaitMarraztu(marko, 290, 100);
-        zerbaitMarraztu(bMejorarArma, 570, 270);
-        textuaIdatzi("Zure dirua:", 330, 130);
-
-        char txt[10];
-        sprintf(txt, "%d", diruEKant);
-        textuaIdatzi(txt, 550, 130);
-        zerbaitMarraztu(mejoraArmaImagen, 477, 180);
-        textuaIdatzi("Kostua:", 330, 280);
-        sprintf(txt, "%d", mejoraKostua);
-        textuaIdatzi(txt, 475, 280);
-        zerbaitMarraztu(bSalirArmero, 710, 120);
-        marraztuNivelMejora(650, 270);
-        pantailaBerriztu();
-        SDL_Delay(10);
-        t++;
+        
     }
 }
 

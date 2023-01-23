@@ -23,9 +23,9 @@ int main(int argc, char* args[])
 {
 
     inizializazioa();
-    //menu();
+    menu();
     
-    //scriptInicio();
+    scriptInicio();
    
     while (!quit)
     {

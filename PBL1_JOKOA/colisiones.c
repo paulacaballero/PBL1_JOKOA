@@ -24,7 +24,7 @@ extern SDL_Window* window;
 
 int daño = 1;
 int dañoEnemigos = 1;
-int enemigosKop = 200;
+int enemigosKop = 100;
 
 void balaKolizioak(int i)
 {
@@ -143,6 +143,7 @@ void enemigoKolisioak(int i)
     }
     if (hp <= 0) {
         died = 1;
+        quit = 1;
     }
 }
 void mezuaAgertu(char* mezua, int x, int y) {

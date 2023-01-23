@@ -15,7 +15,7 @@ extern SDL_Surface* screenSurface;
 extern SDL_Surface* playerP1;
 extern SDL_Surface* background;
 extern SDL_Surface* bala;
-extern SDL_Surface* marko;
+extern SDL_Surface* markoL;
 extern SDL_Surface* mezua;
 extern SDL_Surface* backgroundCopy;
 extern SDL_Surface* bala_rota;
@@ -122,13 +122,13 @@ void alerta(char* textua,int x, int y)
    
     marko_posicion.x = x;
     marko_posicion.y = y;
-    testua_posicion.x = x + 30;
+    testua_posicion.x = x + 60;
     testua_posicion.y = y + 30;
-    irudiaMarraztu(marko, marko_posicion);
+    irudiaMarraztu(markoL, marko_posicion);
     SDL_FreeSurface(mezua);
     mezua = TTF_RenderText_Solid_Wrapped(font, textua, black,1050);
    
-    irudiaMarraztu(marko, marko_posicion);
+    irudiaMarraztu(markoL, marko_posicion);
     irudiaMarraztu(mezua, testua_posicion);
   
     

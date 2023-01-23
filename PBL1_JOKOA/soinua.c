@@ -11,6 +11,7 @@ int soinuKop = 0;
 Mix_Music* musika = NULL;
 int battleMusicOn = 1;
 int mainMusicOn = 0;
+int finalMusicOn = 1;
 int id;
 int loadD = 0;
 int loadH = 0;
@@ -32,6 +33,16 @@ void soinuaHil() {
 
 void musikaAldaketa(int soinua) {
     
+    if (soinua == 2) {
+        if (finalMusicOn != 1) {
+            audioInit();
+            loadTheMusic(FINAL_MUSIC);
+            playMusic();
+            mainMusicOn = 0;
+            battleMusicOn = 0;
+            finalMusicOn = 1;
+        }
+    }
     if (soinua == 1) {
         if (mainMusicOn!=1) {
             audioInit();
@@ -39,6 +50,7 @@ void musikaAldaketa(int soinua) {
             playMusic();
             mainMusicOn = 1;
             battleMusicOn = 0;
+            finalMusicOn = 0;
         }
     }
     if (soinua == 0) {
@@ -48,6 +60,7 @@ void musikaAldaketa(int soinua) {
             playMusic();
             mainMusicOn = 0;
             battleMusicOn = 1;
+            finalMusicOn = 0;
         }
     }
 }

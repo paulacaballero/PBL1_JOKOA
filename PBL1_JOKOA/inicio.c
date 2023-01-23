@@ -7,6 +7,7 @@ extern int quit;
 int scriptQuit = 0;
 int pageCount = 1;
 
+extern SDL_Surface* fondo;
 void scriptInicio()
 {
     while (scriptQuit==0)
@@ -18,7 +19,8 @@ void scriptInicio()
     }
 }
 void script() {
-  
+    
+    zerbaitMarraztu(fondo, 0, 0);
     switch (pageCount) {
     case 1:
         alerta(DIAG1, 0, 358);
@@ -29,7 +31,9 @@ void script() {
     case 3:
         alerta(DIAG3, 0, 358);
         break;
-
+    case 4:
+        alerta(DIAG4, 0, 358);
+        break;
     }
            
     
@@ -46,7 +50,7 @@ void scriptEvents() {
         if (e.type == SDL_QUIT) quit = 1;
         if (e.type == SDL_MOUSEBUTTONDOWN) pageCount++;
     }
-    if (pageCount == 3) {
+    if (pageCount == 5) {
         scriptQuit = 1;
     }
    

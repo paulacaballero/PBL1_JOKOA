@@ -13,8 +13,8 @@
 
 extern const int SCREEN_HEIGHT, SCREEN_WIDTH;
 
-int posX = 300;
-int posY = 300;
+int posX = 510;
+int posY = 240;
 int quit = 0;
 int abiadura = 3;
 int mugitzen = 0;
@@ -26,7 +26,7 @@ enum direkzioak { BEHERA, GORA, EZK, ESK };
 int player_dir = BEHERA;
 
 extern int menuQuit;
-extern int mapaY;
+extern int mapaY,mapaX;
 extern int armeroQuit;
 
 
@@ -38,8 +38,6 @@ void handleEvents()
     while (SDL_PollEvent(&e) != 0)
     {
         if (e.type == SDL_QUIT) quit = 1;
-        
-       
     }
 
     if (keystates[SDL_SCANCODE_ESCAPE])
@@ -122,6 +120,9 @@ void handleEvents()
                 landareakAldatu();
             }
         }
+    }
+    if (mapaY == 2 && (mapaX == 2 || mapaX == 3)) {
+        
     }
 }
 

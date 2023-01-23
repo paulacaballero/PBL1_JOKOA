@@ -4,6 +4,7 @@
 #define MAX_SOUNDS 10
 #define MAIN_MUSIC ".//music//main_theme.wav"
 #define BATTLE_MUSIC ".//music//battle_theme.wav"
+#define FINAL_MUSIC ".//music//finalboss_theme.wav"
 #define DISPARO ".//music//slime_disparo.wav"
 #define HIL ".//music//hit.wav"
 #define PLANTA ".//music//coin.wav"

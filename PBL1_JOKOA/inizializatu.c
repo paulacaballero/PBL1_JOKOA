@@ -11,7 +11,8 @@ SDL_Surface* playerP1 = NULL;
 SDL_Surface* background = NULL;
 SDL_Surface* backgroundCopy = NULL;
 SDL_Surface* bala = NULL;
-SDL_Surface* marko = NULL;
+SDL_Surface* markoL = NULL;
+SDL_Surface* markoS = NULL;
 SDL_Surface* mezua = NULL;
 SDL_Surface* enemigo_irudia = NULL;
 SDL_Surface* bala_rota = NULL;
@@ -29,6 +30,7 @@ SDL_Surface* huellaU = NULL;
 SDL_Surface* puestito = NULL;
 SDL_Surface* mejoraArmaImagen = NULL;
 SDL_Surface* gameOverTitulo = NULL;
+SDL_Surface* fondo = NULL;
 
 extern TTF_Font* font;
 extern SDL_Rect player_posicion;
@@ -106,12 +108,14 @@ int loadMedia()
     monedaE = loadMediaUnit(monedaE, ".//img//moneda4.bmp");
     bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas1.bmp");
     bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX1.bmp");
-    marko = loadMediaUnit(marko, ".//img//diag.bmp");
+    markoL = loadMediaUnit(markoL, ".//img//dialogo2.bmp");
+    markoS = loadMediaUnit(markoS, ".//img//marco_v0.bmp");
     mejoraU = loadMediaUnit(mejoraU, ".//img//mejoraU2.bmp");
     huellaU = loadMediaUnit(huellaU, ".//img//huellaU.bmp");
     puestito = loadMediaUnit(puestito, ".//img//puestito1.bmp");
     mejoraArmaImagen = loadMediaUnit(mejoraArmaImagen, ".//img//mejoraArmaImagen.bmp");
     gameOverTitulo = loadMediaUnit(gameOverTitulo, ".//img//gameOver.bmp");
+    fondo = loadMediaUnit(fondo, ".//img//fondoinicio.bmp");
     font = TTF_OpenFont(".//fonts//sans.ttf", 35);
     if (font == NULL)
     {
@@ -137,8 +141,8 @@ void inizializazioa()
         quit = 1;
     }
 
-    player_posicion.x = 300;
-    player_posicion.y = 300;
+    player_posicion.x = 590;
+    player_posicion.y = 304;
 
     marko_posicion.x = 300;
     marko_posicion.y = 300;

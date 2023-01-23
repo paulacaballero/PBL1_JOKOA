@@ -11,7 +11,7 @@
 #include "guardia.h"
 #include "mapak.h"
 
-int mapaX = 3;
+int mapaX = 1;
 int mapaY = 2;
 
 extern SDL_Surface* background;
@@ -63,6 +63,7 @@ void mapak()
             drawProp(".//img//barril.bmp", 700, 270);
             drawProp(".//img//caja2.bmp", 670, 340);
             naturalistaMarraztu();
+            soinua = 1;
             hego = 1;
             break;
         case 3:
@@ -82,6 +83,7 @@ void mapak()
             marraztuPuesto();
             drawProp(".//img//planta.bmp", 410, 200);
             drawProp(".//img//planta.bmp", 190, 170);
+            soinua = 1;
             hego = 1;
             break;
         }
@@ -136,6 +138,7 @@ void mapak()
             resetMonedas();
             guardiaMarraztu();
             mezuaAgertu(MEZUA_ATEA_L1, 600, 385);
+            mezuaAgertu(MEZUA_GUARDIA_L1, 0, 250);
             soinua = 1;
             break;
         case 3:
@@ -149,11 +152,9 @@ void mapak()
 
 
             drawProp(".//img//barril.bmp", 275, 315);
-            //drawProp(".//img//caja3.bmp", 175, 340);
             drawProp(".//img//planta.bmp", 235, 370);
 
             drawProp(".//img//caja1.bmp", 750, 330);
-            //drawProp(".//img//barril.bmp", 690, 310);
             drawProp(".//img//caja2.bmp", 720, 370);
 
             drawProp(".//img//barril.bmp", 680, 100);
@@ -168,8 +169,10 @@ void mapak()
             break;
         case 4:
             //final boss
+            background = loadMediaUnit(background, ".//img//sala_final.bmp");
+            backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//sala_final.bmp");
             mende = 1;
-            soinua = 0;
+            soinua = 2;
             break;
         }
         break;
@@ -205,7 +208,7 @@ void mapak()
         }
         break;
     }
-    //musikaAldaketa(soinua);
+    musikaAldaketa(soinua);
 }
 
 void ateak()

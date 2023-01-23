@@ -18,9 +18,16 @@ void guardiaMarraztu()
 	if (pausoa < 10) guardia = loadMediaUnit(guardia, ".//img//soldado1.bmp");
 	else if (pausoa < 20) guardia = loadMediaUnit(guardia, ".//img//soldado2.bmp");
 
-	zerbaitMarraztu(guardia, 905, 180);
+	if ((mapaX == 2 && enemigosKop < 100) || (mapaX == 3 && enemigosKop < 200)) {
+		zerbaitMarraztu(guardia, 905, 255);
+		jokalariKolizioKarratua(905, 965, 285, 330);
+	}
+	else {
+		zerbaitMarraztu(guardia, 905, 180);
+		jokalariKolizioKarratua(905, 965, 210, 240);
+	}
+	
 }
-
 int dialogoGuardia() {
 	int ireki = 1;
 	if (mapaX==2) {
@@ -39,4 +46,7 @@ int dialogoGuardia() {
 	}
 
 	return ireki;
+}
+void ateaBlokeatu(char* mezua) {
+	alerta(mezua, 0, 250);
 }
