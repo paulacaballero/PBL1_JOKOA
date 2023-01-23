@@ -20,9 +20,11 @@ extern int t, azkenDamageT;
 extern int hp, invulnerable, quit, died;
 
 extern int posX, posY,mapaX,mapaY;
+extern SDL_Window* window;
 
 int daño = 1;
 int dañoEnemigos = 1;
+int enemigosKop = 200;
 
 void balaKolizioak(int i)
 {
@@ -92,6 +94,7 @@ void jokalariKolizioak()
         }
         else posY -= 5;
     }
+
     ateak();
 }
 
@@ -101,6 +104,7 @@ void monedakKolizioak(int i)
     {
         monedakA[i] = 0;
         diruKant++;
+        enemigosKop++;
     }
 }
 
@@ -137,13 +141,18 @@ void enemigoKolisioak(int i)
         soinuaHil();
         enemigoDim--;
     }
+    if (hp <= 0) {
+        died = 1;
+    }
 }
 void mezuaAgertu(char* mezua, int x, int y) {
-    if (mapaX == 2 && mapaY == 2) {
+    if ((mapaX == 2 ||mapaX==3) && mapaY == 2) {
         if ((posX < 470 && posX>280) && (posY < 393 && posY>350)) {
             alerta(mezua,x,y);
         }
     }
 }
-
+void popup(char* text) {
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "Kontuz!", text, window);
+}
 

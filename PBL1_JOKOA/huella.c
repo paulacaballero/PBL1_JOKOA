@@ -13,7 +13,10 @@ extern SDL_Surface* huellaU;
 
 void huellaIgo()
 {
-    if (t % 600 == 0) huellaCarbono++;
+    if (huellaCarbono < huellaMax) {
+        if (t % 600 == 0) huellaCarbono++;
+    }
+    
 }
 
 void huellaMarraztu()

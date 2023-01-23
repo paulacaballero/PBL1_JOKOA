@@ -106,7 +106,7 @@ int loadMedia()
     monedaE = loadMediaUnit(monedaE, ".//img//moneda4.bmp");
     bMejorarArma = loadMediaUnit(bMejorarArma, ".//img//bMas1.bmp");
     bSalirArmero = loadMediaUnit(bSalirArmero, ".//img//bX1.bmp");
-    marko = loadMediaUnit(marko, ".//img//marco_v0.bmp");
+    marko = loadMediaUnit(marko, ".//img//diag.bmp");
     mejoraU = loadMediaUnit(mejoraU, ".//img//mejoraU2.bmp");
     huellaU = loadMediaUnit(huellaU, ".//img//huellaU.bmp");
     puestito = loadMediaUnit(puestito, ".//img//puestito1.bmp");

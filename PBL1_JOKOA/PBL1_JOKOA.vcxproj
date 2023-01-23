@@ -139,7 +139,9 @@
     <ClCompile Include="enemigos.c" />
     <ClCompile Include="gameover.c" />
     <ClCompile Include="gertaerak.c" />
+    <ClCompile Include="guardia.c" />
     <ClCompile Include="huella.c" />
+    <ClCompile Include="inicio.c" />
     <ClCompile Include="inizializatu.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="mapak.c" />
@@ -159,7 +161,9 @@
     <ClInclude Include="enemigos.h" />
     <ClInclude Include="gameover.h" />
     <ClInclude Include="gertaerak.h" />
+    <ClInclude Include="guardia.h" />
     <ClInclude Include="huella.h" />
+    <ClInclude Include="inicio.h" />
     <ClInclude Include="inizializatu.h" />
     <ClInclude Include="mapak.h" />
     <ClInclude Include="marraztu.h" />

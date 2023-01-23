@@ -7,6 +7,8 @@
 #include "soinua.h"
 #include "armero.h"
 #include "menu.h"
+#include "guardia.h"
+#include "naturalista.h"
 
 
 extern const int SCREEN_HEIGHT, SCREEN_WIDTH;

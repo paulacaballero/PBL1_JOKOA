@@ -124,9 +124,9 @@ void alerta(char* textua,int x, int y)
     marko_posicion.y = y;
     testua_posicion.x = x + 30;
     testua_posicion.y = y + 30;
-    marko = loadMediaUnit(marko, ".//img//marco_v0.bmp");
+    irudiaMarraztu(marko, marko_posicion);
     SDL_FreeSurface(mezua);
-    mezua = TTF_RenderText_Solid(font, textua, black);
+    mezua = TTF_RenderText_Solid_Wrapped(font, textua, black,1050);
    
     irudiaMarraztu(marko, marko_posicion);
     irudiaMarraztu(mezua, testua_posicion);

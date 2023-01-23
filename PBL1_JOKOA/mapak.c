@@ -8,8 +8,10 @@
 #include "colisiones.h"
 #include "props.h"
 #include "naturalista.h"
+#include "guardia.h"
+#include "mapak.h"
 
-int mapaX = 1;
+int mapaX = 3;
 int mapaY = 2;
 
 extern SDL_Surface* background;
@@ -20,7 +22,7 @@ extern Mix_Music* musika;
 extern int posX, posY;
 int ipar, eki,mende,hego;
 
-extern int enemigoGela;
+extern int enemigoGela,enemigosKop;
 
 void mapak()
 {
@@ -91,6 +93,23 @@ void mapak()
             //hasiera
             background = loadMediaUnit(background, ".//img//bg.bmp");
             backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//bg.bmp");
+
+            drawProp(".//img//barril.bmp", 150, 280);
+            drawProp(".//img//planta.bmp", 250, 330);
+            drawProp(".//img//caja3.bmp", 175, 330);
+
+            drawProp(".//img//caja1.bmp", 300, 120);
+            drawProp(".//img//planta.bmp", 300, 150);
+            drawProp(".//img//barril.bmp", 240, 120);
+
+            drawProp(".//img//caja3.bmp", 570, 125);
+            drawProp(".//img//caja3.bmp", 660, 145);
+            drawProp(".//img//caja3.bmp", 600, 170);
+            drawProp(".//img//caja2.bmp", 620, 135);
+
+            drawProp(".//img//barril.bmp", 750, 380);
+            drawProp(".//img//barril.bmp", 690, 380);
+           
             eki = 1;
             soinua = 1;
             break;
@@ -111,20 +130,40 @@ void mapak()
             drawProp(".//img//caja3.bmp", 735, 330);
             drawProp(".//img//barril.bmp", 690, 310);
             drawProp(".//img//caja2.bmp", 730, 390);
-
+            
             ipar = eki = mende = hego = 1;
             resetEnemies();
             resetMonedas();
-            mezuaAgertu(MEZUA_ATEA, 700, 310);
+            guardiaMarraztu();
+            mezuaAgertu(MEZUA_ATEA_L1, 600, 385);
             soinua = 1;
             break;
         case 3:
             //lobby 2
             background = loadMediaUnit(background, ".//img//sala_segura_1.bmp");
             backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//sala_segura_1.bmp");
+
+            drawProp(".//img//planta.bmp", 350, 120);
+            drawProp(".//img//caja3.bmp", 280, 120);
+            drawProp(".//img//barril.bmp", 250, 120);
+
+
+            drawProp(".//img//barril.bmp", 275, 315);
+            //drawProp(".//img//caja3.bmp", 175, 340);
+            drawProp(".//img//planta.bmp", 235, 370);
+
+            drawProp(".//img//caja1.bmp", 750, 330);
+            //drawProp(".//img//barril.bmp", 690, 310);
+            drawProp(".//img//caja2.bmp", 720, 370);
+
+            drawProp(".//img//barril.bmp", 680, 100);
+            drawProp(".//img//barril.bmp", 745, 100);
+
             ipar = eki = mende = hego = 1;
             resetEnemies();
             resetMonedas();
+            guardiaMarraztu();
+            mezuaAgertu(MEZUA_ATEA_L2, 600, 385);
             soinua = 1;
             break;
         case 4:
@@ -171,6 +210,7 @@ void mapak()
 
 void ateak()
 {
+    int ireki;
     if (posY < 250 && posY>190)
     {
         if (posX < 40)
@@ -180,8 +220,15 @@ void ateak()
         }
         if (posX > 961)
         {
-            mapaX += 1;
-            posX = 50;
+            ireki = dialogoGuardia();
+            if (ireki) {
+
+                mapaX += 1;
+                posX = 50;
+            }
+            else {
+                posX = 956;
+            }
         }
     }
     if (posX < 560 && posX>470)

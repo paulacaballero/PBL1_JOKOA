@@ -14,16 +14,19 @@
 #include "huella.h"
 #include "colisiones.h"
 #include "gameOver.h"
+#include "inicio.h"
 
 extern int quit;
 extern int t;
-
+extern int scriptQuit;
 int main(int argc, char* args[])
 {
 
     inizializazioa();
-    menu();
-
+    //menu();
+    
+    //scriptInicio();
+   
     while (!quit)
     {
         pantailaGarbitu();
