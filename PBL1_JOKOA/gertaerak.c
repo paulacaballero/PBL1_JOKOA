@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include "colisiones.h"
 #include "mapak.h"
 #include "marraztu.h"
@@ -28,10 +29,15 @@ int player_dir = BEHERA;
 extern int menuQuit;
 extern int mapaY,mapaX;
 extern int armeroQuit;
-extern int naturalistaQuit;
+extern int naturalistaQuit, enemigosKop;
 
 extern SDL_Surface* background;
 extern SDL_Surface* backgroundCopy;
+extern SDL_Surface* markoS;
+extern SDL_Surface* mezua;
+extern TTF_Font* font;
+extern SDL_Color black;
+extern SDL_Rect testua_posicion;
 
 void handleEvents()
 {
@@ -124,6 +130,29 @@ void handleEvents()
                 naturalistaQuit = 0;
                 SDL_BlitSurface(background, NULL, backgroundCopy, NULL);
                 menuNaturalista();
+            }
+        }
+    }
+    else if (mapaY == 2 && ((mapaX == 2 && enemigosKop < 100) || (mapaX == 3 && enemigosKop < 200)))
+    {
+        if (posY + 80 > 285 && posY + 80 < 330 && posX + 38 > 855 && posX + 38 < 905)
+        {
+            if (keystates[SDL_SCANCODE_F])
+            {
+                
+                zerbaitMarraztu(markoS, 290, 100);
+                testua_posicion.x = 350;
+                testua_posicion.y = 200;
+                if (mapaX == 2) {
+                    mezua = TTF_RenderText_Solid_Wrapped(font, MEZUA_GUARDIA_L1, black, 440);
+                }
+                if (mapaX == 3) {
+                    mezua = TTF_RenderText_Solid_Wrapped(font, MEZUA_GUARDIA_L2, black, 500);
+                }
+                irudiaMarraztu(mezua, testua_posicion);
+                jokalariaMarraztu();
+                pantailaBerriztu();
+                SDL_Delay(2000);
             }
         }
     }

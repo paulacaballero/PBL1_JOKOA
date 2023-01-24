@@ -10,11 +10,11 @@
 #include "menu.h"
 #include "vida.h"
 #include "dirua.h"
-#include "armero.h"
 #include "huella.h"
 #include "colisiones.h"
 #include "gameOver.h"
 #include "inicio.h"
+#include "boss.h"
 
 extern int quit;
 extern int t;
@@ -42,11 +42,12 @@ int main(int argc, char* args[])
 
         jokalariaMarraztu();
 
+        combateBoss();
+
         vidaMarraztu();
 
         huellaIgo();
         huellaMarraztu();
-
        
 
         pantailaBerriztu();

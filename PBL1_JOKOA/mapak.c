@@ -10,6 +10,7 @@
 #include "naturalista.h"
 #include "guardia.h"
 #include "mapak.h"
+#include "tiroak.h"
 
 int mapaX = 1;
 int mapaY = 2;
@@ -138,9 +139,9 @@ void mapak()
             ipar = eki = mende = hego = 1;
             resetEnemies();
             resetMonedas();
+            
             guardiaMarraztu();
             mezuaAgertu(MEZUA_ATEA_L1, 600, 385);
-            mezuaAgertu(MEZUA_GUARDIA_L1, 0, 250);
             soinua = 1;
             break;
         case 3:

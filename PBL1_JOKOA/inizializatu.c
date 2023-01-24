@@ -32,6 +32,7 @@ SDL_Surface* mejoraArmaImagen = NULL;
 SDL_Surface* gameOverTitulo = NULL;
 SDL_Surface* fondo = NULL;
 SDL_Surface* vidaUBoss = NULL;
+SDL_Surface* mejoraVidaImagen = NULL;
 
 extern TTF_Font* font;
 extern SDL_Rect player_posicion;
@@ -117,6 +118,7 @@ int loadMedia()
     markoL = loadMediaUnit(markoL, ".//img//dialogo2.bmp");
     markoS = loadMediaUnit(markoS, ".//img//marco_v0.bmp");
     fondo = loadMediaUnit(fondo, ".//img//fondoinicio.bmp");
+    mejoraVidaImagen = loadMediaUnit(mejoraVidaImagen, ".//img//mejora_vida.bmp");
     font = TTF_OpenFont(".//fonts//sans.ttf", 35);
 
     if (font == NULL)

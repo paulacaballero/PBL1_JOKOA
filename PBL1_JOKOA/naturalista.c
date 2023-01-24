@@ -51,7 +51,7 @@ int naturalistaEvents()
     if (mouseX > 453 && mouseX < 453 + 173 && mouseY > 200 && mouseY < 264)
     {
         state = 1;
-        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenDonazioaT >= 20 && diruEKant > 0)
+        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenDonazioaT >= 20 && diruEKant > 0&& huellaCarbono>0)
         {
             azkenDonazioaT = t;
             diruEKant -= 1;

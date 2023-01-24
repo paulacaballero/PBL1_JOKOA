@@ -17,6 +17,7 @@ extern SDL_Surface* mejoraU;
 extern SDL_Surface* mezua;
 extern SDL_Surface* puestito;
 extern SDL_Surface* mejoraArmaImagen;
+extern SDL_Surface* mejoraVidaImagen;
 extern TTF_Font* font;
 extern SDL_Color black;
 SDL_Color red = { 255, 0, 0 };
@@ -146,7 +147,10 @@ void menuArmero()
             zerbaitMarraztu(mejoraArmaImagen, 477, 180);
             sprintf(txt, "%d", mejoraKostua);
         }
-        else sprintf(txt, "%d", mejoraKostuaVida);;
+        else {
+            zerbaitMarraztu(mejoraVidaImagen, 477, 180);
+            sprintf(txt, "%d", mejoraKostuaVida);
+        }
 
         textuaIdatzi(txt, 475, 280);
         zerbaitMarraztu(bSalirArmero, 710, 120);

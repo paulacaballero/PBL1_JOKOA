@@ -25,7 +25,7 @@ extern SDL_Window* window;
 
 int daño = 1;
 int dañoEnemigos = 1;
-int enemigosKop = 100;
+int enemigosKop = 0;
 
 int vidaBoss = 1000;
 int dañoBoss = 10;

@@ -96,3 +96,6 @@ void balakMarraztu()
         }
     }
 }
+void resetTiroak() {
+    balakDim = 0;
+}
