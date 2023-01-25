@@ -20,7 +20,7 @@ extern SDL_Surface* backgroundCopy;
 
 extern Mix_Music* musika;
 
-extern int posX, posY,t;
+extern int posX, posY,t,balakDim;
 int ipar, eki,mende,hego;
 
 extern int enemigoGela,enemigosKop;
@@ -224,6 +224,7 @@ void ateak()
         {
             mapaX -= 1;
             posX = 959;
+            balakDim = 0;
         }
         if (posX > 961)
         {
@@ -232,6 +233,7 @@ void ateak()
 
                 mapaX += 1;
                 posX = 50;
+                balakDim = 0;
             }
             else {
                 posX = 956;
@@ -244,11 +246,13 @@ void ateak()
         {
             mapaY -= 1;
             posY = 450;
+            balakDim = 0;
         }
         if (posY > 460)
         {
             mapaY += 1;
             posY = 20;
+            balakDim = 0;
         }
     }
     mapak();

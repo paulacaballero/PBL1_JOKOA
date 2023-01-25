@@ -1,13 +1,14 @@
 #include "inicio.h"
 #include "marraztu.h"
 #include "update.h"
+#include "inizializatu.h"
 #include <SDL.h>
 
 extern int quit;
 int scriptQuit = 0;
 int pageCount = 1;
 
-extern SDL_Surface* fondo;
+extern SDL_Surface* fondoDialogo;
 void scriptInicio()
 {
     while (scriptQuit==0)
@@ -20,22 +21,28 @@ void scriptInicio()
 }
 void script() {
     
-    zerbaitMarraztu(fondo, 0, 0);
     switch (pageCount) {
     case 1:
+        fondoDialogo = loadMediaUnit(fondoDialogo, ".//img//bombaNuclear.bmp");
+        zerbaitMarraztu(fondoDialogo, 0, 0);
         alerta(DIAG1, 0, 358);
         break;
     case 2:
+        fondoDialogo = loadMediaUnit(fondoDialogo, ".//img//fondoBunker.bmp");
+        zerbaitMarraztu(fondoDialogo, 0, 0);
         alerta(DIAG2, 0, 358);
         break;
     case 3:
+        zerbaitMarraztu(fondoDialogo, 0, 0);
         alerta(DIAG3, 0, 358);
         break;
     case 4:
+        fondoDialogo = loadMediaUnit(fondoDialogo, ".//img//fondoinicio.bmp");
+        zerbaitMarraztu(fondoDialogo, 0, 0);
         alerta(DIAG4, 0, 358);
         break;
     }
-           
+    
     
 }
 void scriptEvents() {

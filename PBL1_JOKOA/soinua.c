@@ -5,8 +5,6 @@
 
 
 Mix_Chunk* disparo;
-Mix_Chunk* hil;
-char karga[MAX_SOUNDS];
 int soinuKop = 0;
 Mix_Music* musika = NULL;
 int battleMusicOn = 1;
@@ -18,17 +16,10 @@ int loadH = 0;
 void soinuaDisparo() {
     
     if (loadH == 0) {
-        hil = Mix_LoadWAV(DISPARO);
+        disparo = Mix_LoadWAV(DISPARO);
         loadH = 1;
     }
     Mix_PlayChannel(-1, disparo, 0);
-}
-void soinuaHil() {
-    if (loadH == 0) {
-        hil = Mix_LoadWAV(HIL);
-        loadH = 1;
-    }
-    Mix_PlayChannel(-1, hil, 0);
 }
 
 void musikaAldaketa(int soinua) {

@@ -8,7 +8,6 @@
 #include "props.h"
 
 
-
 extern const int SCREEN_WIDTH, SCREEN_HEIGHT;
 extern int balakX[], balakY[], balakA[], balakDim;
 extern int ipar, eki, hego, mende;

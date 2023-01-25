@@ -139,6 +139,7 @@
     <ClCompile Include="dirua.c" />
     <ClCompile Include="enemigos.c" />
     <ClCompile Include="gameover.c" />
+    <ClCompile Include="gameplay.c" />
     <ClCompile Include="gertaerak.c" />
     <ClCompile Include="guardia.c" />
     <ClCompile Include="huella.c" />
@@ -162,6 +163,7 @@
     <ClInclude Include="dirua.h" />
     <ClInclude Include="enemigos.h" />
     <ClInclude Include="gameover.h" />
+    <ClInclude Include="gameplay.h" />
     <ClInclude Include="gertaerak.h" />
     <ClInclude Include="guardia.h" />
     <ClInclude Include="huella.h" />

@@ -24,8 +24,7 @@ int main(int argc, char* args[])
 
     inizializazioa();
     menu();
-    
-    scriptInicio();
+    if(!quit) scriptInicio();
    
     while (!quit)
     {

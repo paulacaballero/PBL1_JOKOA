@@ -30,9 +30,10 @@ SDL_Surface* huellaU = NULL;
 SDL_Surface* puestito = NULL;
 SDL_Surface* mejoraArmaImagen = NULL;
 SDL_Surface* gameOverTitulo = NULL;
-SDL_Surface* fondo = NULL;
+SDL_Surface* fondoDialogo = NULL;
 SDL_Surface* vidaUBoss = NULL;
 SDL_Surface* mejoraVidaImagen = NULL;
+SDL_Surface* bControls = NULL;
 
 extern TTF_Font* font;
 extern SDL_Rect player_posicion;
@@ -117,8 +118,9 @@ int loadMedia()
     gameOverTitulo = loadMediaUnit(gameOverTitulo, ".//img//gameOver.bmp");
     markoL = loadMediaUnit(markoL, ".//img//dialogo2.bmp");
     markoS = loadMediaUnit(markoS, ".//img//marco_v0.bmp");
-    fondo = loadMediaUnit(fondo, ".//img//fondoinicio.bmp");
+    fondoDialogo = loadMediaUnit(fondoDialogo, ".//img//fondoinicio.bmp");
     mejoraVidaImagen = loadMediaUnit(mejoraVidaImagen, ".//img//mejora_vida.bmp");
+    bControls = loadMediaUnit(bControls, ".//img//botonControls.bmp");
     font = TTF_OpenFont(".//fonts//sans.ttf", 35);
 
     if (font == NULL)
