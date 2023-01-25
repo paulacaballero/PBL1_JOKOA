@@ -6,7 +6,7 @@
 #include "inizializatu.h"
 #include "colisiones.h"
 #include "enemigos.h"
-#include "tiroak.h" 
+#include "tiroak.h"
 
 SDL_Surface* bossImage = NULL;
 SDL_Surface* bossTiro = NULL;

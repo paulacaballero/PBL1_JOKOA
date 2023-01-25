@@ -34,14 +34,12 @@ int dialogoGuardia() {
 		if (enemigosKop < 100) {
 			ireki = 0;
 			popup(ALERTALB1);
-			alerta(ALERTALB1, 0, 250);
 		}
 	}
 	if (mapaX == 3) {
 		if (enemigosKop < 200) {
 			ireki = 0;
 			popup(ALERTALB2);
-			alerta(ALERTALB2, 0, 250);
 		}
 	}
 

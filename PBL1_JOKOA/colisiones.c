@@ -24,7 +24,7 @@ extern SDL_Window* window;
 
 int daño = 1;
 int dañoEnemigos = 1;
-int enemigosKop = 0;
+int enemigosKop = 200;
 
 int vidaBoss = 1000;
 int dañoBoss = 10;
@@ -209,7 +209,7 @@ void bossKolisioak(int bx, int by)
 }
 void mezuaAgertu(char* mezua, int x, int y) {
     if ((mapaX == 2 ||mapaX==3) && mapaY == 2) {
-        if ((posX < 470 && posX>280) && (posY < 393 && posY>350)) {
+        if ((posX < 470 && posX>280) && (posY < 400 && posY>350)) {
             alerta(mezua,x,y);
         }
     }

@@ -121,6 +121,7 @@ int loadMedia()
     fondoDialogo = loadMediaUnit(fondoDialogo, ".//img//fondoinicio.bmp");
     mejoraVidaImagen = loadMediaUnit(mejoraVidaImagen, ".//img//mejora_vida.bmp");
     bControls = loadMediaUnit(bControls, ".//img//botonControls.bmp");
+    vidaUBoss = loadMediaUnit(vidaUBoss, ".//img//vidaUBoss.bmp");
     font = TTF_OpenFont(".//fonts//sans.ttf", 35);
 
     if (font == NULL)

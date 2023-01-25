@@ -66,10 +66,10 @@ int naturalistaEvents()
     else if (mouseX > 453 && mouseX < 453 + 173 && mouseY > 360 && mouseY < 424)
     {
         state = 3;
-        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenDonazioaT >= 20 && diruKant >= 5)
+        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenDonazioaT >= 20 && diruKant >= 2)
         {
             azkenDonazioaT = t;
-            diruKant -= 5;
+            diruKant -= 2;
             diruEKant++;
         }
     }
@@ -113,7 +113,7 @@ void menuNaturalista()
         textuaIdatzi("aztarna jaisteko:", 320, 150);
         zerbaitMarraztu(bDonar, donarX, donarY);
 
-        textuaIdatzi("5 landare txanpon", 320, 280);
+        textuaIdatzi("2 landare txanpon", 320, 280);
         textuaIdatzi("batengatik aldatu:", 320, 310);
         zerbaitMarraztu(bDonar, aldatuX, aldatuY);
 

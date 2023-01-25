@@ -1,5 +1,7 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <stdio.h>
 #include "colisiones.h"
 #include "mapak.h"
 #include "marraztu.h"
@@ -27,7 +29,7 @@ enum direkzioak { BEHERA, GORA, EZK, ESK };
 int player_dir = BEHERA;
 
 extern int menuQuit;
-extern int mapaY,mapaX;
+extern int mapaY, mapaX;
 extern int armeroQuit;
 extern int naturalistaQuit, enemigosKop;
 
@@ -43,7 +45,7 @@ void handleEvents()
 {
     SDL_Event e;
     const Uint8* keystates = SDL_GetKeyboardState(NULL);
-    
+
     while (SDL_PollEvent(&e) != 0)
     {
         if (e.type == SDL_QUIT) quit = 1;
@@ -55,7 +57,7 @@ void handleEvents()
         menu();
     }
     mugitzen = 0;
-    
+
     if (keystates[SDL_SCANCODE_W])
     {
         posY -= abiadura;
@@ -139,10 +141,10 @@ void handleEvents()
         {
             if (keystates[SDL_SCANCODE_F])
             {
-                
+
                 zerbaitMarraztu(markoS, 290, 100);
                 testua_posicion.x = 350;
-                testua_posicion.y = 200;
+                testua_posicion.y = 170;
                 if (mapaX == 2) {
                     mezua = TTF_RenderText_Solid_Wrapped(font, MEZUA_GUARDIA_L1, black, 440);
                 }
@@ -150,6 +152,9 @@ void handleEvents()
                     mezua = TTF_RenderText_Solid_Wrapped(font, MEZUA_GUARDIA_L2, black, 500);
                 }
                 irudiaMarraztu(mezua, testua_posicion);
+                char txt[20];
+                sprintf(txt, "Hartu dituzu: %d", enemigosKop);
+                textuaIdatzi(txt, 350, 370);
                 jokalariaMarraztu();
                 pantailaBerriztu();
                 SDL_Delay(2000);
@@ -157,4 +162,3 @@ void handleEvents()
         }
     }
 }
-
