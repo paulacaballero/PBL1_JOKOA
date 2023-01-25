@@ -31,8 +31,9 @@ void script() {
         fondoDialogo = loadMediaUnit(fondoDialogo, ".//img//fondoBunker.bmp");
         zerbaitMarraztu(fondoDialogo, 0, 0);
         alerta(DIAG2, 0, 358);
-        break;
+        break; 
     case 3:
+        fondoDialogo = loadMediaUnit(fondoDialogo, ".//img//plantasPorMonedas.bmp");
         zerbaitMarraztu(fondoDialogo, 0, 0);
         alerta(DIAG3, 0, 358);
         break;
