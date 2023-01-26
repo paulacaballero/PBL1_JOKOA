@@ -6,6 +6,7 @@
 #include "mapak.h"
 #include "marraztu.h"
 #include "update.h"
+
 #include "tiroak.h"
 #include "soinua.h"
 #include "armero.h"
@@ -52,7 +53,6 @@ void handleEvents()
         if (e.type == SDL_QUIT) quit = 1;
     }
     
-
     if (keystates[SDL_SCANCODE_ESCAPE])
     {
         menuQuit = 0;
