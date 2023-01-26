@@ -10,7 +10,7 @@
 
 SDL_Surface* naturalistaS = NULL;
 
-extern int t, diruKant, diruEKant, quit, huellaCarbono;
+extern int t, landareKant, monedaKant, quit, huellaCarbono;
 extern SDL_Surface* markoS;
 extern SDL_Surface* bSalirArmero;
 
@@ -31,8 +31,8 @@ void naturalistaMarraztu()
 
 void landareakAldatu()
 {
-    diruEKant += diruKant / 5;
-    diruKant = diruKant % 5;
+    monedaKant += landareKant / 2;
+    landareKant = landareKant % 2;
 }
 
 int naturalistaEvents()
@@ -51,10 +51,10 @@ int naturalistaEvents()
     if (mouseX > 453 && mouseX < 453 + 173 && mouseY > 200 && mouseY < 264)
     {
         state = 1;
-        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenDonazioaT >= 20 && diruEKant > 0&& huellaCarbono>0)
+        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenDonazioaT >= 20 && monedaKant > 0&& huellaCarbono>0)
         {
             azkenDonazioaT = t;
-            diruEKant -= 1;
+            monedaKant -= 1;
             huellaCarbono -= 1;
         }
     }
@@ -66,11 +66,11 @@ int naturalistaEvents()
     else if (mouseX > 453 && mouseX < 453 + 173 && mouseY > 360 && mouseY < 424)
     {
         state = 3;
-        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenDonazioaT >= 20 && diruKant >= 2)
+        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenDonazioaT >= 20 && landareKant >= 2)
         {
             azkenDonazioaT = t;
-            diruKant -= 2;
-            diruEKant++;
+            landareKant -= 2;
+            monedaKant++;
         }
     }
     else state = 0;

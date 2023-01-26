@@ -7,6 +7,7 @@
 #include "colisiones.h"
 #include "enemigos.h"
 #include "tiroak.h"
+#include "update.h"
 
 SDL_Surface* bossImage = NULL;
 SDL_Surface* bossTiro = NULL;
@@ -30,8 +31,10 @@ extern const int SCREEN_HEIGHT;
 float disparoX[11], disparoY[11], disparoA[11], destX[11], destY[11];
 int disparoDim = 0;
 extern int posX, posY;
+extern int huellaCarbono;
 
 int fase = 1;
+int final = 0;
 
 enum direkzioak { BEHERA, GORA, EZK, ESK };
 
@@ -43,7 +46,7 @@ void marraztuBoss(int px, int py)
     else if (pausoa < 15) bossImage = loadMediaUnit(bossImage, ".//img//nube3.bmp");
     else if (pausoa < 20) bossImage = loadMediaUnit(bossImage, ".//img//nube4.bmp");
     zerbaitMarraztu(bossImage, px, py);
-    //jokalariKolizioKarratua(px, px + 303, py, py + 186); 
+    //jokalariKolizioKarratua(px, px + 303, py, py + 186);
 }
 
 void barraVidaBoss(int px, int py)
@@ -200,9 +203,33 @@ void disparosBoss()
     disparoBossMarraztu();
 }
 
+void bossHilAnimazioa(int px, int py)
+{
+    int animazioaHasiT = t;
+    SDL_Surface* bossAnimazioa = NULL;
+    while (t - animazioaHasiT < 350)
+    {
+        pantailaGarbitu();
+        if (t - animazioaHasiT < 70) bossAnimazioa = loadMediaUnit(bossAnimazioa, ".//img//bossAnimazioa1.bmp");
+        else if (t - animazioaHasiT < 140) bossAnimazioa = loadMediaUnit(bossAnimazioa, ".//img//bossAnimazioa2.bmp");
+        else if (t - animazioaHasiT < 210) bossAnimazioa = loadMediaUnit(bossAnimazioa, ".//img//bossAnimazioa3.bmp");
+        else if (t - animazioaHasiT < 280) bossAnimazioa = loadMediaUnit(bossAnimazioa, ".//img//bossAnimazioa4.bmp");
+        else if (t - animazioaHasiT < 350) bossAnimazioa = loadMediaUnit(bossAnimazioa, ".//img//bossAnimazioa5.bmp");
+
+        if (t % 2) px += 2;
+        else px -= 2;
+        zerbaitMarraztu(bossAnimazioa, px, py);
+        jokalariaMarraztu();
+        pantailaBerriztu();
+        SDL_Delay(10);
+        t++;
+    }
+
+}
+
 void combateBoss()
 {
-    if (bossGela)
+    if (bossGela && vidaBoss > 0)
     {
         if (vidaBoss < 500) fase = 2;
         if (fase == 2) miniBoss();
@@ -210,5 +237,12 @@ void combateBoss()
         marraztuBoss(388, 211);
         barraVidaBoss(20, 550);
         bossKolisioak(388, 211);
+    }
+    else if (bossGela && vidaBoss <= 0)
+    {
+        bossHilAnimazioa(388, 211);
+        if (huellaCarbono <= 30) final = 2;
+        else final = 1;
+        quit = 1;
     }
 }

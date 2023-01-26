@@ -8,8 +8,8 @@
 #include <math.h>
 #include "colisiones.h"
 
-int diruKant = 0;
-int diruEKant = 0;
+int landareKant = 0;
+int monedaKant = 0;
 
 int monedakX[20];
 int monedakY[20];
@@ -76,13 +76,13 @@ void marraztuDirua()
     posizioa.x = 980;
     posizioa.y = 15;
 
-    sprintf(textua, "%d", diruKant);
+    sprintf(textua, "%d", landareKant);
     SDL_FreeSurface(mezua);
     mezua = TTF_RenderText_Solid(font, textua, black);
     irudiaMarraztu(mezua, posizioa);
 
     posizioa.y = 65;
-    sprintf(textua, "%d", diruEKant);
+    sprintf(textua, "%d", monedaKant);
     SDL_FreeSurface(mezua);
     mezua = TTF_RenderText_Solid(font, textua, black);
     irudiaMarraztu(mezua, posizioa);

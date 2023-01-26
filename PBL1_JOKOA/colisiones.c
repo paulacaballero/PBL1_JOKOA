@@ -12,7 +12,7 @@ extern const int SCREEN_WIDTH, SCREEN_HEIGHT;
 extern int balakX[], balakY[], balakA[], balakDim;
 extern int ipar, eki, hego, mende;
 
-extern int monedakA[], monedakX[], monedakY[], diruKant;
+extern int monedakA[], monedakX[], monedakY[], landareKant;
 
 extern int enemigoX[], enemigoY[], enemigoHP[], enemigoDim;
 extern int t, azkenDamageT, enemigoGela, bossGela;
@@ -24,7 +24,7 @@ extern SDL_Window* window;
 
 int daño = 1;
 int dañoEnemigos = 1;
-int enemigosKop = 200;
+int enemigosKop = 0;
 
 int vidaBoss = 1000;
 int dañoBoss = 10;
@@ -105,7 +105,7 @@ void monedakKolizioak(int i)
     if (fabs(monedakX[i] - posX - 24) < 35 && fabs(monedakY[i] - posY - 61) < 35 && monedakA[i])
     {
         monedakA[i] = 0;
-        diruKant++;
+        landareKant++;
         enemigosKop++;
     }
 }

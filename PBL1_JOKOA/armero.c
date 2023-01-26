@@ -23,7 +23,7 @@ extern SDL_Color black;
 SDL_Color red = { 255, 0, 0 };
 
 int armeroQuit = 0;
-extern int quit, t, diruEKant, daño, hp, hpMax;
+extern int quit, t, monedaKant, daño, hp, hpMax;
 
 int nivelArma = 1;
 int mejoraKostua = 10;
@@ -44,7 +44,7 @@ void textuaIdatzi(char* txt, int px, int py)
 void mejorarArma()
 {
     nivelArma++;
-    diruEKant -= mejoraKostua;
+    monedaKant -= mejoraKostua;
     mejoraKostua += 5;
     daño += 1;
 }
@@ -52,7 +52,7 @@ void mejorarArma()
 void mejorarVida()
 {
     nivelVida++;
-    diruEKant -= mejoraKostuaVida;
+    monedaKant -= mejoraKostuaVida;
     mejoraKostuaVida += 5;
     hpMax += 2;
     hp = hpMax;
@@ -99,8 +99,8 @@ int armeroEvents()
         state = 1;
         if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT) && t - azkenMejoraT >= 30)
         {
-            if (mapaX == 2 && diruEKant >= mejoraKostua && nivelArma < 10) mejorarArma();
-            else if (mapaX == 3 && diruEKant >= mejoraKostuaVida && nivelVida < 10) mejorarVida();
+            if (mapaX == 2 && monedaKant >= mejoraKostua && nivelArma < 10) mejorarArma();
+            else if (mapaX == 3 && monedaKant >= mejoraKostuaVida && nivelVida < 10) mejorarVida();
             azkenMejoraT = t;
         }
     }
@@ -137,7 +137,7 @@ void menuArmero()
         textuaIdatzi("Zure dirua:", 330, 130);
 
         char txt[10];
-        sprintf(txt, "%d", diruEKant);
+        sprintf(txt, "%d", monedaKant);
         textuaIdatzi(txt, 550, 130);
 
         textuaIdatzi("Kostua:", 330, 280);

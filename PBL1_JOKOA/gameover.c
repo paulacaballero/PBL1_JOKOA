@@ -1,12 +1,17 @@
 #include <SDL.h>
 #include "marraztu.h"
 #include "update.h"
+#include "inizializatu.h"
 
 int died = 0;
 int gameOverQuit = 0;
 
 extern SDL_Surface* bSalir;
 extern SDL_Surface* gameOverTitulo;
+extern SDL_Surface* background;
+extern SDL_Surface* backgroundCopy;
+
+extern int final;
 
 void gameOverEvents()
 {
@@ -21,11 +26,8 @@ void gameOverEvents()
     }
 
     if (keystates[SDL_SCANCODE_ESCAPE]) gameOverQuit = 1;
-
-    if (mouseX > 363 && mouseX < 363 + 354 && mouseY > 300 && mouseY < 364)
-    {
-        if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT)) gameOverQuit = 1;
-    }
+    if (keystates[SDL_SCANCODE_RETURN]) gameOverQuit = 1;
+    if (buttonState & SDL_BUTTON(SDL_BUTTON_LEFT)) gameOverQuit = 1;
 }
 
 void gameOverScreen()
@@ -37,6 +39,26 @@ void gameOverScreen()
             pantailaGarbitu();
             gameOverEvents();
             zerbaitMarraztu(gameOverTitulo, 357, 200);
+            pantailaBerriztu();
+        }
+    }
+    else if (final)
+    {
+        while (!gameOverQuit)
+        {
+            pantailaGarbitu();
+            gameOverEvents();
+            switch (final)
+            {
+            case 1:
+                background = loadMediaUnit(background, ".//img//finalMalo.bmp");
+                backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//finalMalo.bmp");
+                break;
+            case 2:
+                background = loadMediaUnit(background, ".//img//finalBueno.bmp");
+                backgroundCopy = loadMediaUnit(backgroundCopy, ".//img//finalBueno.bmp");
+                break;
+            }
             pantailaBerriztu();
         }
     }
