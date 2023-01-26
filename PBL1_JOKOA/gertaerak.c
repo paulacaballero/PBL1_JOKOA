@@ -52,12 +52,6 @@ void handleEvents()
         if (e.type == SDL_QUIT) quit = 1;
     }
 
-    if (keystates[SDL_SCANCODE_P]) {
-        enemigosKop += 100;
-    }
-    if (keystates[SDL_SCANCODE_O]) {
-        monedaKant += 100;
-    }
     if (keystates[SDL_SCANCODE_ESCAPE])
     {
         menuQuit = 0;
