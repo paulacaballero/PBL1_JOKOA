@@ -1,0 +1,5 @@
+KONTROLAK: 
+- Pertsonaia mugitzeko -> WASD
+- Tiroak egiteko -> teklatu geziak
+- Beste pertsonaiekin interaktuatzeko -> F tekla
+- Menuetan botoiak sakatzeko -> sagua
