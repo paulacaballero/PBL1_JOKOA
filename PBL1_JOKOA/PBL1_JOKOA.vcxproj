@@ -72,12 +72,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\SDL2_mixer-2.6.2\include;C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\SDL2_ttf-2.20.1\include;C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\SDL2-2.26.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\SDL2_mixer-2.6.2\lib\x64;C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\SDL2_ttf-2.20.1\lib\x64;C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\SDL2-2.26.1\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\\SDL2_mixer-2.6.2\include;.\\SDL2_ttf-2.20.1\include;.\\SDL2-2.26.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\\SDL2_mixer-2.6.2\lib\x64;.\\SDL2_ttf-2.20.1\lib\x64;.\\SDL2-2.26.1\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\x64\Release\SDL2-2.26.1\include;C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\x64\Release\SDL2_mixer-2.6.2\include;C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\x64\Release\SDL2_ttf-2.20.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\x64\Release\SDL2_mixer-2.6.2\lib\x64;C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\x64\Release\SDL2_ttf-2.20.1\lib\x64;C:\Users\Paula\OneDrive - Mondragon Unibertsitatea\Escritorio\class\PBL\PBL1_JOKOA%28main%29\x64\Release\SDL2-2.26.1\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\\Release\SDL2_mixer-2.6.2\include;.\\Release\SDL2_ttf-2.20.1\include;.\\Release\SDL2-2.26.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\\Release\SDL2_mixer-2.6.2\lib\x64;.\\Release\SDL2_ttf-2.20.1\lib\x64;.\\Release\SDL2-2.26.1\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

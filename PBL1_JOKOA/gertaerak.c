@@ -51,6 +51,7 @@ void handleEvents()
     {
         if (e.type == SDL_QUIT) quit = 1;
     }
+    
 
     if (keystates[SDL_SCANCODE_ESCAPE])
     {
